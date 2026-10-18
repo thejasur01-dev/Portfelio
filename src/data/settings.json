@@ -10,7 +10,7 @@
     "faq": true,
     "contact": true
   },
-  "tickers": false,
+  "tickers": true,
   "grain": true,
   "stickyCta": true
 }
