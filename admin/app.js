@@ -930,6 +930,8 @@ const loginError = document.getElementById('login-error');
 function showGate() {
   gate.hidden = false;
   loginError.textContent = '';
+  // Shapkadagi «yuklanmoqda...» kirish oynasida ma'nosiz bo'lib qoladi
+  document.getElementById('status').textContent = '';
   document.getElementById('password').value = '';
   document.getElementById('login').focus();
 }
