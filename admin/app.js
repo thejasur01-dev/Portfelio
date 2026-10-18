@@ -288,7 +288,7 @@ function renderPortfolio() {
    * odatda hech narsa bosish kerak emas. Surat olinmasa (sayt ochilmasa)
    * xabar chiqadi va qo'lda yuklash tugmasi joyida qolaveradi.
    */
-  const shoot = async (item) => {
+  const shoot = async (item, redraw = true) => {
     if (!item.url) return;
     const status = document.getElementById('status');
     status.className = 'status';
@@ -318,11 +318,25 @@ function renderPortfolio() {
 
       item.image = url;
       markDirty('portfolio');
-      render();
+      if (redraw) render();
     } catch (error) {
       status.className = 'status dirty';
       status.textContent = error.message;
     }
+  };
+
+  // Havolasi bor, lekin surati yo'q loyihalar — birinchi marta o'tkazilganlar
+  const needShot = list.filter((item) => item.url && !item.image);
+
+  /** Hammasiga ketma-ket surat oladi. Birin-ketin: xizmatni bosmaslik uchun. */
+  const shootAll = async () => {
+    const status = document.getElementById('status');
+    for (let index = 0; index < needShot.length; index += 1) {
+      status.className = 'status';
+      status.textContent = `surat olinmoqda ${index + 1}/${needShot.length}…`;
+      await shoot(needShot[index], false);
+    }
+    render();
   };
 
   /** Ekran surati: brauzerda kichraytirilib yuklanadi */
@@ -432,6 +446,9 @@ function renderPortfolio() {
     }),
     el('div', { class: 'filters' }, [
       el('button', { class: 'primary', text: '+ Loyiha qo‘shish', onclick: add }),
+      needShot.length
+        ? el('button', { text: `Suratsizlarga surat olish (${needShot.length})`, onclick: shootAll })
+        : null,
       search,
       el('label', { class: 'toggle' }, [missing, el('span', { text: 'Faqat havolasizlari' })]),
       el('span', { class: 'status', text: `${shown.length} ta ko‘rsatilmoqda` }),
