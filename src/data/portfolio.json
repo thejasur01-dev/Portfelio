@@ -1,32 +1,13 @@
 [
   {
-    "id": "agzamova",
-    "name": "",
-    "role": "Kosmetolog · Brovist · O‘qitish",
-    "city": "",
-    "instagram": "cosmetolog_agzamovaa",
-    "tags": [
-      "video",
-      "map",
-      "course"
-    ],
-    "image": "/work/agzamova.webp",
-    "url": "",
-    "featured": false,
-    "hidden": false
-  },
-  {
-    "id": "babyangel",
-    "name": "",
-    "role": "Bolalar va ayollar massaji",
-    "city": "",
-    "instagram": "babyangel.uz",
-    "tags": [
-      "map",
-      "price"
-    ],
-    "image": "/work/babyangel.webp",
-    "url": "",
+    "id": "loyiha-mvecjqw0",
+    "name": "browuz",
+    "role": "Lashmaker",
+    "city": "Toshkent",
+    "instagram": "@dilya.browis",
+    "tags": [],
+    "image": "",
+    "url": "https://browuz.netlify.app/",
     "featured": false,
     "hidden": false
   },
