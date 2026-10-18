@@ -139,12 +139,27 @@ function run(command, args) {
     // argumentga aylanadi («pathspec ... did not match»).
     const isNpm = command === 'npm';
     const exe = isNpm && process.platform === 'win32' ? 'npm.cmd' : command;
-    const child = spawn(exe, args, { cwd: ROOT, shell: isNpm && process.platform === 'win32' });
+    const child = spawn(exe, args, {
+      cwd: ROOT,
+      shell: isNpm && process.platform === 'win32',
+      // Git parol so'rab kutib qolmasin — kutish o'rniga darhol xato bersin.
+      // Aks holda panel «Yuborilmoqda...» da abadiy qotib qoladi.
+      env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
+    });
+
     let out = '';
     child.stdout.on('data', (data) => (out += data));
     child.stderr.on('data', (data) => (out += data));
-    child.on('close', (code) => resolve({ ok: code === 0, output: out }));
-    child.on('error', (error) => resolve({ ok: false, output: error.message }));
+
+    // Oxirgi chora: buyruq 2 daqiqada tugamasa to'xtatamiz
+    const guard = setTimeout(() => child.kill(), 120_000);
+    const finish = (result) => {
+      clearTimeout(guard);
+      resolve(result);
+    };
+
+    child.on('close', (code) => finish({ ok: code === 0, output: out }));
+    child.on('error', (error) => finish({ ok: false, output: error.message }));
   });
 }
 
@@ -170,17 +185,25 @@ async function publish(message) {
   const text = String(message || '').trim() || `Sayt matni yangilandi — ${new Date().toLocaleString('uz-UZ')}`;
   const committed = note('git commit', await run('git', ['commit', '-m', text]));
 
-  // «nothing to commit» — xato emas: o'zgarish yo'q, demak yuboradigan narsa ham yo'q
-  if (/nothing to commit|nothing added to commit/i.test(committed.output)) {
-    return { ok: true, output: `${log()}\n\n— Yangi o‘zgarish yo‘q, yuborilmadi.` };
-  }
-  if (!committed.ok) return { ok: false, output: log() };
+  // «nothing to commit» xato emas — shunchaki yangi o'zgarish yo'q.
+  // Lekin shunda ham push qilamiz: oldingi urinishda commit bo'lib, yuborilmay
+  // qolgan bo'lishi mumkin. Yuboradigan narsa bo'lmasa git o'zi «up-to-date» deydi.
+  const nothing = /nothing to commit|nothing added to commit/i.test(committed.output);
+  if (!committed.ok && !nothing) return { ok: false, output: log() };
 
   const pushed = note('git push', await run('git', ['push']));
-  const tail = pushed.ok
-    ? '— Yuborildi. Vercel bir-ikki daqiqada saytni yangilaydi.'
-    : '— Yuborilmadi. Quyidagi xabarni o‘qing.';
-  return { ok: pushed.ok, output: `${log()}\n\n${tail}` };
+  if (!pushed.ok) {
+    const noAuth = /could not read|Authentication failed|terminal prompts disabled/i.test(pushed.output);
+    const hint = noAuth
+      ? '— GitHub parolini so‘rayapti. Bir marta «SAYTNI CHIQARISH.bat» ni ishga tushirib kiring, keyin bu tugma ishlaydi.'
+      : '— Yuborilmadi. Yuqoridagi xabarni o‘qing.';
+    return { ok: false, output: `${log()}\n\n${hint}` };
+  }
+
+  const tail = /Everything up-to-date/i.test(pushed.output)
+    ? '— Saytda hamma narsa allaqachon yangi.'
+    : '— Yuborildi. Vercel bir-ikki daqiqada saytni yangilaydi.';
+  return { ok: true, output: `${log()}\n\n${tail}` };
 }
 
 const serveFile = (res, file) => {
