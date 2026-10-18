@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Voyla — admin panel</title>
+    <link rel="icon" href="data:," />
+    <style>
+      /* ============================================================
+         Panel saytning o'zidan alohida turadi: bu ish quroli, shuning
+         uchun bezak kam, maydonlar katta va bosish oson.
+         ============================================================ */
+      :root {
+        --void: #0c0613;
+        --ink: #140a1f;
+        --card: #1c0f2b;
+        --line: rgba(246, 241, 251, 0.1);
+        --cream: #f6f1fb;
+        --mute: #a894bd;
+        --faint: #6f5b85;
+        --coral: #ff5a4e;
+        --magenta: #d4379b;
+        --ok: #3ecf8e;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--void);
+        color: var(--cream);
+        font: 15px/1.5 "Segoe UI", system-ui, -apple-system, sans-serif;
+      }
+
+      a {
+        color: var(--magenta);
+      }
+
+      /* ---------- Yuqori panel ---------- */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 20px;
+        background: rgba(12, 6, 19, 0.94);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .logo {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .logo i {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        margin-left: 3px;
+        border-radius: 50%;
+        background: var(--coral);
+      }
+
+      .spacer {
+        flex: 1;
+      }
+
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: 0;
+        border-radius: 10px;
+        padding: 9px 15px;
+        background: rgba(246, 241, 251, 0.08);
+        color: var(--cream);
+        transition: background 0.15s;
+      }
+
+      button:hover {
+        background: rgba(246, 241, 251, 0.15);
+      }
+
+      button.primary {
+        background: var(--coral);
+        color: #fff;
+        font-weight: 600;
+      }
+
+      button.primary:hover {
+        background: #ff6e63;
+      }
+
+      button.ghost {
+        background: transparent;
+        border: 1px solid var(--line);
+        color: var(--mute);
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+
+      button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .status {
+        font-size: 13px;
+        color: var(--faint);
+      }
+
+      .status.dirty {
+        color: var(--coral);
+      }
+
+      .status.ok {
+        color: var(--ok);
+      }
+
+      /* ---------- Bo'limlar ---------- */
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 14px 20px 0;
+      }
+
+      nav button[aria-selected='true'] {
+        background: var(--cream);
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      main {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 18px 20px 120px;
+      }
+
+      /* ---------- Maydonlar ---------- */
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+
+      label {
+        display: block;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--faint);
+        margin-bottom: 5px;
+      }
+
+      input[type='text'],
+      input[type='number'],
+      textarea,
+      select {
+        width: 100%;
+        font: inherit;
+        color: var(--cream);
+        background: rgba(246, 241, 251, 0.05);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 9px 12px;
+        resize: vertical;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: 2px solid var(--magenta);
+        outline-offset: 1px;
+      }
+
+      textarea {
+        min-height: 78px;
+        line-height: 1.55;
+      }
+
+      .row {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .row.two {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .row.three {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (max-width: 760px) {
+        .row.two,
+        .row.three {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .lang-tag {
+        display: inline-block;
+        min-width: 26px;
+        margin-right: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--magenta);
+      }
+
+      .group-title {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--mute);
+        margin: 22px 0 10px;
+      }
+
+      .hint {
+        font-size: 13px;
+        color: var(--faint);
+        margin: 0 0 16px;
+      }
+
+      /* ---------- Loyihalar ---------- */
+      .project {
+        display: grid;
+        grid-template-columns: 86px 1fr;
+        gap: 14px;
+        align-items: start;
+      }
+
+      .project img {
+        width: 86px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: var(--ink);
+      }
+
+      .project .thumb-empty {
+        display: grid;
+        place-items: center;
+        width: 86px;
+        height: 186px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        color: var(--faint);
+        font-size: 24px;
+      }
+
+      .toggles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13.5px;
+        color: var(--mute);
+        text-transform: none;
+        letter-spacing: 0;
+        margin: 0;
+      }
+
+      .toggle input {
+        width: 17px;
+        height: 17px;
+        accent-color: var(--coral);
+      }
+
+      .badge {
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .badge.live {
+        background: rgba(62, 207, 142, 0.15);
+        color: var(--ok);
+      }
+
+      .badge.none {
+        background: rgba(255, 90, 78, 0.14);
+        color: var(--coral);
+      }
+
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .filters input[type='text'] {
+        max-width: 280px;
+      }
+
+      /* ---------- Pastki qator ---------- */
+      .build-log {
+        white-space: pre-wrap;
+        font-family: ui-monospace, Consolas, monospace;
+        font-size: 12.5px;
+        color: var(--mute);
+        background: #090410;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        max-height: 320px;
+        overflow: auto;
+      }
+
+      .list-item {
+        border-top: 1px solid var(--line);
+        padding-top: 14px;
+        margin-top: 14px;
+      }
+
+      .list-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .list-head strong {
+        flex: 1;
+        font-size: 14px;
+      }
+
+      /* ---------- Kirish oynasi ---------- */
+      #gate {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: var(--void);
+      }
+
+      #gate[hidden] {
+        display: none;
+      }
+
+      #gate form {
+        width: 100%;
+        max-width: 340px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px 24px;
+      }
+
+      #gate h1 {
+        margin: 14px 0 22px;
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--mute);
+      }
+
+      #gate label {
+        margin-top: 14px;
+      }
+
+      #gate button {
+        width: 100%;
+        margin-top: 22px;
+        min-height: 44px;
+      }
+
+      #login-error {
+        min-height: 18px;
+        margin: 10px 0 0;
+        font-size: 13px;
+        color: var(--coral);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gate" hidden>
+      <form id="login-form">
+        <span class="logo">voyla<i></i></span>
+        <h1>Admin panel</h1>
+
+        <label for="login">Login</label>
+        <input id="login" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" />
+
+        <label for="password">Parol</label>
+        <input id="password" type="password" autocomplete="current-password" />
+
+        <p id="login-error" role="alert"></p>
+        <button class="primary" type="submit">Kirish</button>
+      </form>
+    </div>
+
+    <header>
+      <span class="logo">voyla<i></i></span>
+      <span class="status" id="status">yuklanmoqda…</span>
+      <span class="spacer"></span>
+      <label class="toggle" style="margin: 0">
+        <span style="color: var(--faint); font-size: 12px">TIL</span>
+        <select id="lang" style="width: auto; padding: 7px 10px">
+          <option value="uz">O'zbekcha</option>
+          <option value="ru">Русский</option>
+          <option value="en">English</option>
+          <option value="all">Hammasi</option>
+        </select>
+      </label>
+      <button id="save" class="primary">Saqlash</button>
+      <button id="build">Saytni yig'ish</button>
+      <button id="logout" class="ghost">Chiqish</button>
+    </header>
+
+    <nav id="tabs"></nav>
+    <main id="view"></main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+[
+  {
+    "id": "start",
+    "popular": false,
+    "name": {
+      "uz": "Start",
+      "ru": "Start",
+      "en": "Start"
+    },
+    "for": {
+      "uz": "Endi boshlayotgan usta uchun",
+      "ru": "Для начинающего мастера",
+      "en": "For a master just starting out"
+    },
+    "price": "",
+    "priceNote": {
+      "uz": "narxni kelishamiz",
+      "ru": "цену согласуем",
+      "en": "price on request"
+    },
+    "days": {
+      "uz": "3 soat",
+      "ru": "3 часа",
+      "en": "3 hours"
+    },
+    "items": [
+      {
+        "uz": "Bir sahifali sayt",
+        "ru": "Одностраничный сайт",
+        "en": "One-page site"
+      },
+      {
+        "uz": "Ikki til: o‘zbek va rus",
+        "ru": "Два языка: узбекский и русский",
+        "en": "Two languages: Uzbek and Russian"
+      },
+      {
+        "uz": "Xizmatlar va ochiq prays",
+        "ru": "Услуги и открытый прайс",
+        "en": "Services and open prices"
+      },
+      {
+        "uz": "Ko‘p so‘raladigan savollar",
+        "ru": "Частые вопросы",
+        "en": "FAQ section"
+      },
+      {
+        "uz": "Telegram va Instagram tugmalari",
+        "ru": "Кнопки Telegram и Instagram",
+        "en": "Telegram and Instagram buttons"
+      },
+      {
+        "uz": "iPhone va Android sinovi",
+        "ru": "Проверка на iPhone и Android",
+        "en": "iPhone and Android testing"
+      }
+    ]
+  },
+  {
+    "id": "pro",
+    "popular": true,
+    "name": {
+      "uz": "Pro",
+      "ru": "Pro",
+      "en": "Pro"
+    },
+    "for": {
+      "uz": "Mijozlari bor, o‘sayotgan usta uchun",
+      "ru": "Для мастера с клиентами, который растёт",
+      "en": "For a growing master with clients"
+    },
+    "price": "",
+    "priceNote": {
+      "uz": "narxni kelishamiz",
+      "ru": "цену согласуем",
+      "en": "price on request"
+    },
+    "days": {
+      "uz": "1 kun",
+      "ru": "1 день",
+      "en": "1 day"
+    },
+    "items": [
+      {
+        "uz": "Start paketidagi hamma narsa",
+        "ru": "Всё из пакета Start",
+        "en": "Everything in Start"
+      },
+      {
+        "uz": "Video fonli birinchi ekran",
+        "ru": "Первый экран с видеофоном",
+        "en": "Video background hero"
+      },
+      {
+        "uz": "«Oldin / keyin» galereyasi",
+        "ru": "Галерея «до / после»",
+        "en": "Before / after gallery"
+      },
+      {
+        "uz": "Mijoz fikrlari bo‘limi",
+        "ru": "Раздел отзывов",
+        "en": "Client reviews section"
+      },
+      {
+        "uz": "Kabinet manzili va yo‘l ko‘rsatish",
+        "ru": "Адрес кабинета и маршрут",
+        "en": "Address and directions"
+      },
+      {
+        "uz": "Sertifikat va diplomlar bo‘limi",
+        "ru": "Раздел сертификатов и дипломов",
+        "en": "Certificates and diplomas section"
+      }
+    ]
+  },
+  {
+    "id": "studio",
+    "popular": false,
+    "name": {
+      "uz": "Studio",
+      "ru": "Studio",
+      "en": "Studio"
+    },
+    "for": {
+      "uz": "Klinika, salon va o‘quv markazlari uchun",
+      "ru": "Для клиник, салонов и учебных центров",
+      "en": "For clinics, salons and schools"
+    },
+    "price": "",
+    "priceNote": {
+      "uz": "narxni kelishamiz",
+      "ru": "цену согласуем",
+      "en": "price on request"
+    },
+    "days": {
+      "uz": "2 kun",
+      "ru": "2 дня",
+      "en": "2 days"
+    },
+    "items": [
+      {
+        "uz": "Pro paketidagi hamma narsa",
+        "ru": "Всё из пакета Pro",
+        "en": "Everything in Pro"
+      },
+      {
+        "uz": "Uchinchi til (ingliz yoki boshqa)",
+        "ru": "Третий язык (английский или другой)",
+        "en": "A third language"
+      },
+      {
+        "uz": "3D aylanadigan xaritacha",
+        "ru": "Вращающаяся 3D-карта",
+        "en": "Rotating 3D map"
+      },
+      {
+        "uz": "Jamoa yoki o‘qituvchilar bo‘limi",
+        "ru": "Раздел команды или преподавателей",
+        "en": "Team or teachers section"
+      },
+      {
+        "uz": "Kurs va o‘qitish bo‘limi",
+        "ru": "Раздел курсов и обучения",
+        "en": "Courses and training section"
+      },
+      {
+        "uz": "Admin panel — matn va narxni o‘zingiz o‘zgartirasiz",
+        "ru": "Админ-панель — тексты и цены правите сами",
+        "en": "Admin panel — edit text and prices yourself"
+      }
+    ]
+  }
+]

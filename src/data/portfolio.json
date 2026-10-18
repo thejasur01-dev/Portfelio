@@ -1,0 +1,667 @@
+[
+  {
+    "id": "agzamova",
+    "name": "",
+    "role": "Kosmetolog · Brovist · O‘qitish",
+    "city": "",
+    "instagram": "cosmetolog_agzamovaa",
+    "tags": [
+      "video",
+      "map",
+      "course"
+    ],
+    "image": "/work/agzamova.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "babyangel",
+    "name": "",
+    "role": "Bolalar va ayollar massaji",
+    "city": "",
+    "instagram": "babyangel.uz",
+    "tags": [
+      "map",
+      "price"
+    ],
+    "image": "/work/babyangel.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "burkhanova",
+    "name": "",
+    "role": "",
+    "city": "",
+    "instagram": "dr_burkhanova",
+    "tags": [
+      "before-after"
+    ],
+    "image": "/work/burkhanova.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dilafruz",
+    "name": "",
+    "role": "Kosmetolog · Estetik shifokor",
+    "city": "Toshkent",
+    "instagram": "dr.dilafruz_cosmetolog",
+    "tags": [
+      "before-after"
+    ],
+    "image": "/work/dilafruz.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dildor",
+    "name": "",
+    "role": "Beauty Doctor · Estetik kosmetologiya",
+    "city": "",
+    "instagram": "cosmetology_dr.dildor",
+    "tags": [
+      "before-after"
+    ],
+    "image": "/work/dildor.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dilim",
+    "name": "",
+    "role": "Kosmetolog · Toshkent",
+    "city": "Toshkent",
+    "instagram": "dilim_cosmetolog",
+    "tags": [
+      "before-after"
+    ],
+    "image": "/work/dilim.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "gulirano",
+    "name": "",
+    "role": "Kosmetolog-in’eksionist",
+    "city": "Toshkent",
+    "instagram": "kosmetolog_gulirano",
+    "tags": [
+      "map",
+      "price"
+    ],
+    "image": "/work/gulirano.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "gulnoza",
+    "name": "",
+    "role": "",
+    "city": "",
+    "instagram": "kosmetolog_gulnoza_zaxidovna",
+    "tags": [
+      "before-after"
+    ],
+    "image": "/work/gulnoza.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "gulqiz",
+    "name": "",
+    "role": "Kosmetolog · PMU mutaxassisi",
+    "city": "Toshkent",
+    "instagram": "gulqiz_bakhramovna",
+    "tags": [
+      "video"
+    ],
+    "image": "/work/gulqiz.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "laziza",
+    "name": "",
+    "role": "Vrach-kosmetolog",
+    "city": "Samarqand",
+    "instagram": "laziza_cosmetolog",
+    "tags": [
+      "map",
+      "price",
+      "reviews"
+    ],
+    "image": "/work/laziza.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "madina",
+    "name": "",
+    "role": "Kosmetolog · Toshkent",
+    "city": "Toshkent",
+    "instagram": "madina__cosmetology_",
+    "tags": [
+      "map",
+      "before-after"
+    ],
+    "image": "/work/madina.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "mariyyam",
+    "name": "",
+    "role": "",
+    "city": "",
+    "instagram": "dr.mariyyam",
+    "tags": [
+      "before-after"
+    ],
+    "image": "/work/mariyyam.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "muhlisa",
+    "name": "",
+    "role": "Kosmetolog · Toshkent",
+    "city": "Toshkent",
+    "instagram": "kosmetolog__muhlisa",
+    "tags": [
+      "map",
+      "before-after"
+    ],
+    "image": "/work/muhlisa.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "shox",
+    "name": "",
+    "role": "",
+    "city": "",
+    "instagram": "shoxmed_cosmetology",
+    "tags": [
+      "video",
+      "map",
+      "before-after"
+    ],
+    "image": "/work/shox.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "usmonova",
+    "name": "Barno Usmonova",
+    "role": "Doktor kosmetolog",
+    "city": "Toshkent",
+    "instagram": "doktorsha_usmonova",
+    "tags": [
+      "course"
+    ],
+    "image": "/work/usmonova.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "sitora",
+    "name": "Begmatova Sitora",
+    "role": "Kosmetolog-in’eksionist",
+    "city": "Toshkent",
+    "instagram": "cosmetolog__sitora",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/sitora.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "bibixanum",
+    "name": "Bibixanum",
+    "role": "Estetik kosmetolog",
+    "city": "Toshkent",
+    "instagram": "cosmetolog_bi",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/bibixanum.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dilafruz-olimjonovna",
+    "name": "Dilafruz Olimjonovna",
+    "role": "Kosmetolog",
+    "city": "Toshkent",
+    "instagram": "kosmetolog_dilam",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/dilafruz-olimjonovna.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dildora",
+    "name": "Dildora Hafizovna",
+    "role": "Kosmetolog · Toshkent",
+    "city": "Toshkent",
+    "instagram": "cosmetolog__dildora",
+    "tags": [
+      "video"
+    ],
+    "image": "/work/dildora.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dilrabo",
+    "name": "Dilrabo",
+    "role": "Estetik va in’eksion kosmetolog",
+    "city": "Boysun",
+    "instagram": "estetik_ineksion_cosmetolog",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/dilrabo.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dilya",
+    "name": "Dilya",
+    "role": "Estet_Cosmetolog",
+    "city": "Buxoro",
+    "instagram": "dilya_estet.kosmetolog",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/dilya.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dilya-brow",
+    "name": "Dilya Brow",
+    "role": "Qosh va kiprik ustasi",
+    "city": "",
+    "instagram": "dilyabrow.lashmaker",
+    "tags": [
+      "price"
+    ],
+    "image": "/work/dilya-brow.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "diyora",
+    "name": "Diyora Ulugbekovna",
+    "role": "Vrach-kosmetolog",
+    "city": "",
+    "instagram": "diyoracosmo",
+    "tags": [],
+    "image": "/work/diyora.webp",
+    "url": "https://diyoracosmo.com/",
+    "featured": true,
+    "hidden": false
+  },
+  {
+    "id": "bakieva",
+    "name": "Dr. Bakieva",
+    "role": "Kosmetolog",
+    "city": "Toshkent",
+    "instagram": "bakieva_cosmetolog",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/bakieva.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dilbar",
+    "name": "Dr. Dilbar Jaxongirovna",
+    "role": "Kosmetolog",
+    "city": "Toshkent",
+    "instagram": "dr.dilbar_jaxongirovna",
+    "tags": [
+      "price",
+      "reviews"
+    ],
+    "image": "/work/dilbar.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "marhabo",
+    "name": "Dr. Marhabo",
+    "role": "Kosmetolog",
+    "city": "Jizzax",
+    "instagram": "dr.marhabo_kosmetolog",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/marhabo.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "drnoza",
+    "name": "Dr. Noza",
+    "role": "Kosmetolog-in’yeksionist",
+    "city": "Toshkent",
+    "instagram": "dr.noza_01",
+    "tags": [
+      "map",
+      "reviews"
+    ],
+    "image": "/work/drnoza.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "rano",
+    "name": "Dr. Rano",
+    "role": "Kosmetolog",
+    "city": "Buxoro",
+    "instagram": "dr_rano_cosmetolog",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/rano.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "yasmina",
+    "name": "Dr. Yasmina",
+    "role": "Vrach-kosmetolog",
+    "city": "Toshkent",
+    "instagram": "dryasmina.uz",
+    "tags": [
+      "price"
+    ],
+    "image": "/work/yasmina.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "suleymanova",
+    "name": "Dr. Shahzoda Shavkatovna Suleymanova",
+    "role": "Plastik jarroh",
+    "city": "Toshkent",
+    "instagram": "dr_suleymaanova",
+    "tags": [
+      "video"
+    ],
+    "image": "/work/suleymanova.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "dreambeauty",
+    "name": "Dream Beauty",
+    "role": "Kosmetologiya maktabi",
+    "city": "Toshkent",
+    "instagram": "dream_beauty_aesthetic",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/dreambeauty.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "gogosh",
+    "name": "Gavhar Abduraxmanova",
+    "role": "Kosmetolog",
+    "city": "Toshkent",
+    "instagram": "cosmetolog_gogosh",
+    "tags": [
+      "video",
+      "map"
+    ],
+    "image": "/work/gogosh.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "gavhar",
+    "name": "Gavhar Kahramanovna",
+    "role": "Kosmetolog · in’eksionist · estetist",
+    "city": "Toshkent",
+    "instagram": "cosmetologist.gavhar",
+    "tags": [
+      "map"
+    ],
+    "image": "",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "gavhar-laperla",
+    "name": "Gavhar Kahramanovna",
+    "role": "Kosmetolog · in’eksionist · estetist",
+    "city": "Toshkent",
+    "instagram": "cosmetologist.gavhar",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/gavhar-laperla.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "guli",
+    "name": "Guli",
+    "role": "Kosmetolog",
+    "city": "Toshkent",
+    "instagram": "guli_kosmetolog__pm",
+    "tags": [
+      "course"
+    ],
+    "image": "/work/guli.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "guli-qarshi",
+    "name": "Guli",
+    "role": "Kosmetolog",
+    "city": "Qarshi",
+    "instagram": "guli_cosmetologkarshi",
+    "tags": [
+      "map",
+      "before-after"
+    ],
+    "image": "/work/guli-qarshi.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "idealbrows",
+    "name": "Ideal Brows",
+    "role": "Qosh va lab ustasi",
+    "city": "",
+    "instagram": "ideal_brows_uz",
+    "tags": [
+      "video",
+      "map",
+      "before-after"
+    ],
+    "image": "/work/idealbrows.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "komosh",
+    "name": "Komola",
+    "role": "Permanent makiyaj ustasi",
+    "city": "Guliston",
+    "instagram": "komosh_brow",
+    "tags": [
+      "before-after"
+    ],
+    "image": "/work/komosh.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "charos",
+    "name": "Kosmetolog Charos",
+    "role": "Kosmetolog · Toshkent",
+    "city": "Toshkent",
+    "instagram": "cosmetolog.charos",
+    "tags": [
+      "video",
+      "map",
+      "course"
+    ],
+    "image": "/work/charos.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "maryam",
+    "name": "Maryam",
+    "role": "Cosmetology",
+    "city": "Andijon",
+    "instagram": "maryam_.cosmetology",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/maryam.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "muborak",
+    "name": "Muborak Tursunpulatova",
+    "role": "Kosmetolog",
+    "city": "Denov",
+    "instagram": "muborak_cosmetolog",
+    "tags": [
+      "price"
+    ],
+    "image": "/work/muborak.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "muxlisa-pm",
+    "name": "Muxlisaxon Ziyovuddinova",
+    "role": "Kosmetolog",
+    "city": "",
+    "instagram": "kosmetolog_muxlisa_pm",
+    "tags": [
+      "reviews"
+    ],
+    "image": "/work/muxlisa-pm.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "vazira",
+    "name": "Vazira Mamatova",
+    "role": "To‘y stilisti",
+    "city": "Toshkent",
+    "instagram": "vazira_style",
+    "tags": [
+      "video",
+      "map"
+    ],
+    "image": "/work/vazira.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "_hozirgi",
+    "name": "Xusnora",
+    "role": "Kosmetolog",
+    "city": "Qo‘qon",
+    "instagram": "xusnora.eco.kosmetolog",
+    "tags": [
+      "map",
+      "price",
+      "before-after",
+      "reviews"
+    ],
+    "image": "/work/_hozirgi.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "yulduz",
+    "name": "Yulduz",
+    "role": "Kosmetolog",
+    "city": "Farg‘ona",
+    "instagram": "yulduz.cosmetolog",
+    "tags": [
+      "price",
+      "before-after"
+    ],
+    "image": "/work/yulduz.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "shahlo",
+    "name": "Shahlo Esthetics",
+    "role": "Kosmetolog · Luxury Skin Expert",
+    "city": "Toshkent",
+    "instagram": "shahlo_esthetics",
+    "tags": [
+      "map"
+    ],
+    "image": "/work/shahlo.webp",
+    "url": "",
+    "featured": false,
+    "hidden": false
+  }
+]

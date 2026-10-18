@@ -1,0 +1,524 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+/* ============================================================
+   VOYLA — DIZAYN TIZIMI
+
+   Rang falsafasi: ILIQ MONOXROM + BITTA URG'U.
+   Fon hech qachon rangli emas — iliq ko'mir qora yoki suyak oq. Rang faqat
+   bitta joyda: marjon (logotipimizdagi nuqta rangi). Rangli dog'lar,
+   kamalak gradientlar va har xil rangdagi kartalar olib tashlandi: ular
+   ko'zga tashlanadi, lekin ishonch bermaydi.
+
+   Takrorlanmaslik rangdan emas, TUZILMADAN keladi:
+     — qorong'i va suyak rangli bo'limlar navbatlashadi
+     — orasidan qiya yuguruvchi lenta o'tadi
+     — har sarlavhada bitta so'z qiya serif shriftga o'tadi
+     — ulkan, faqat konturi chizilgan raqamlar
+   ============================================================ */
+@theme {
+  --font-display: "Unbounded", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Qorong'i yuzalar — iliq ko'mir, binafsha emas */
+  --color-void: #0c0b0b;
+  --color-ink: #131211;
+  --color-shade: #171615;
+  --color-card: #1a1818;
+
+  /* Yorug' yuzalar — suyak oq */
+  --color-paper: #f2efe9;
+  --color-paper-2: #e5dfd5;
+  --color-espresso: #171512;
+  --color-espresso-mute: #6d665e;
+
+  /* Yagona urg'u — logotipdagi nuqta rangi */
+  --color-coral: #ff5a4e;
+  --color-coral-soft: #ff8f6a;
+  /* Suyak fonda marjon och bo'lib qoladi — matn uchun to'qrog'i */
+  --color-coral-deep: #d4402f;
+
+  /* Qorong'idagi matn */
+  --color-cream: #f5f2ed;
+  --color-mute: #a09b94;
+  --color-faint: #6b6660;
+
+  --shadow-card: 0 20px 50px -30px rgb(0 0 0 / 0.85);
+  --shadow-lift: 0 26px 60px -34px rgb(0 0 0 / 0.4);
+}
+
+/* ============================================================
+   ANIMATSIYALAR
+   ============================================================ */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes marquee-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+@keyframes marquee-down {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   ASOSIY USLUBLAR
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Bo'lim balandligi o'zgarganda Chrome sahifani sakratmasin */
+  overflow-anchor: none;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-void);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* iOS Safari body'dagi overflow-x: hidden'ga quloq solmaydi */
+@supports (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* @layer base ichida bo'lishi SHART — qatlamsiz CSS Tailwind'ning
+   barcha `max-w-*` klasslarini bosib ketadi. */
+@layer base {
+  img {
+    max-width: 100%;
+  }
+}
+
+::selection {
+  background: var(--color-coral);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* ============================================================
+   KOMPONENTLAR
+   ============================================================ */
+@layer components {
+  /* ---------- Donador parda ----------
+     Butun sahifa ustida turadigan juda yengil «plyonka donasi». Rang
+     tekisligini buzadi va sayt bosma ishga o'xshab qoladi. SVG bir marta
+     rasmga aylantiriladi, keyin takrorlanadi — telefonga og'irlik qilmaydi. */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Tugmalar ---------- */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 54px;
+    padding: 0 1.9rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+  }
+
+  .btn-coral {
+    background-color: var(--color-coral);
+    color: #fff;
+    box-shadow: 0 14px 30px -14px rgb(255 90 78 / 0.75);
+  }
+
+  .btn-coral:hover {
+    background-color: #ff6e63;
+    transform: translateY(-2px);
+  }
+
+  .btn-glass {
+    color: var(--color-cream);
+    background-color: rgb(245 242 237 / 0.06);
+    box-shadow: inset 0 0 0 1px rgb(245 242 237 / 0.18);
+  }
+
+  .btn-glass:hover {
+    background-color: rgb(245 242 237 / 0.13);
+    transform: translateY(-2px);
+  }
+
+  .btn-light {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+  }
+
+  .btn-light:hover {
+    transform: translateY(-2px);
+    background-color: #fff;
+  }
+
+  /* Yorug' bo'limlar uchun qora tugma */
+  .btn-dark {
+    background-color: var(--color-espresso);
+    color: var(--color-paper);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .btn-dark:hover {
+    transform: translateY(-2px);
+    background-color: #2a1830;
+  }
+
+  .btn-outline-dark {
+    color: var(--color-espresso);
+    box-shadow: inset 0 0 0 1.5px rgb(23 21 18 / 0.22);
+  }
+
+  .btn-outline-dark:hover {
+    background-color: rgb(23 21 18 / 0.05);
+    transform: translateY(-2px);
+  }
+
+  .btn:active {
+    transform: scale(0.985);
+  }
+
+  /* ---------- Tipografika ---------- */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 999px;
+    background-color: rgb(255 90 78 / 0.1);
+    padding: 0.4rem 0.9rem;
+    font-size: 10.5px;
+    font-weight: 700;
+    /* 320px ekranda keng harf oralig'i matnni ikki qatorga bo'lib yuboradi */
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-coral);
+    box-shadow: inset 0 0 0 1px rgb(255 90 78 / 0.22);
+  }
+
+  @media (min-width: 420px) {
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+    }
+  }
+
+  /* Yorug' bo'limdagi variant */
+  .eyebrow-dark {
+    background-color: rgb(23 21 18 / 0.05);
+    color: var(--color-coral-deep);
+    box-shadow: inset 0 0 0 1px rgb(23 21 18 / 0.14);
+  }
+
+  /* Sarlavha ichidagi qiya serif so'z — butun saytning «imzosi».
+     Bitta so'z shaklini o'zgartirishi sarlavhani jonlantiradi. */
+  .ital {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    /* Serif shrift geometrik shrift yonida kichikroq ko'rinadi — kattalashtiramiz */
+    font-size: 1.12em;
+    line-height: 0.9;
+  }
+
+  /* Urg'u matni. Gradient juda sezilmas — kamalak emas, bitta rangning
+     ikki tusi; shundan matn tekis bo'yalgandek emas, jonli ko'rinadi. */
+  .grad {
+    background-image: linear-gradient(100deg, var(--color-coral), var(--color-coral-soft));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Faqat konturi chizilgan matn — katta raqamlar uchun */
+  .stroke {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(245 242 237 / 0.26);
+  }
+
+  .stroke-dark {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(23 21 18 / 0.2);
+  }
+
+  /* ---------- Yuzalar ---------- */
+  .card {
+    background-color: var(--color-card);
+    box-shadow: inset 0 0 0 1px rgb(245 242 237 / 0.08), var(--shadow-card);
+  }
+
+  .card-soft {
+    background-color: rgb(245 242 237 / 0.04);
+    box-shadow: inset 0 0 0 1px rgb(245 242 237 / 0.08);
+  }
+
+  /* Yorug' bo'limdagi karta */
+  .card-paper {
+    background-color: #fff;
+    box-shadow: inset 0 0 0 1px rgb(23 21 18 / 0.07), var(--shadow-lift);
+  }
+
+  .hairline {
+    height: 1px;
+    background-image: linear-gradient(90deg, transparent, rgb(245 242 237 / 0.18), transparent);
+  }
+
+  .hairline-dark {
+    height: 1px;
+    background-image: linear-gradient(90deg, transparent, rgb(23 21 18 / 0.2), transparent);
+  }
+
+  /* Fonni mutlaq tekis qoldirmaydigan sezilmas yorug'lik.
+     Rangi yo'q — faqat oq, 4% shaffoflikda. */
+  .aura {
+    background-image: radial-gradient(60% 50% at 70% 0%, rgb(245 242 237 / 0.05), transparent 72%);
+  }
+
+  /* ---------- Yorug' bo'lim ----------
+     Yuqori cheti yumaloq: qorong'i bo'limni «qoplab» kelganday ko'rinadi. */
+  .section-light {
+    position: relative;
+    z-index: 2;
+    background-color: var(--color-paper);
+    color: var(--color-espresso);
+    border-radius: 34px 34px 0 0;
+  }
+
+  @media (min-width: 1024px) {
+    .section-light {
+      border-radius: 54px 54px 0 0;
+    }
+  }
+
+  /* ---------- Yuguruvchi lenta ----------
+     Bo'limlar orasidagi rangli chiziq. Matn ikki marta chizdiriladi va
+     -50% ga suriladi — halqa uzilmaydi. */
+  .ticker {
+    display: flex;
+    width: max-content;
+    animation: marquee-left 34s linear infinite;
+  }
+
+  .ticker-slow {
+    animation-duration: 54s;
+  }
+
+  .ticker:hover {
+    animation-play-state: paused;
+  }
+
+  /* ---------- Telefon ramkasi ---------- */
+  .phone-frame {
+    position: relative;
+    border-radius: 30px;
+    background: linear-gradient(160deg, rgb(245 242 237 / 0.22), rgb(245 242 237 / 0.04));
+    padding: 5px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .phone-screen {
+    overflow: hidden;
+    border-radius: 25px;
+    background-color: #000;
+  }
+
+  /* ---------- Vertikal oqim (birinchi ekrandagi sayt devori) ---------- */
+  .stream {
+    animation: marquee-up 46s linear infinite;
+  }
+
+  .stream-rev {
+    animation: marquee-down 54s linear infinite;
+  }
+
+  .stream:hover,
+  .stream-rev:hover {
+    animation-play-state: paused;
+  }
+
+  .dot-live {
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+
+  .slide-in {
+    animation: slide-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  /* Aylanib turadigan yumaloq yorliq */
+  .spin-slow {
+    animation: spin-slow 22s linear infinite;
+  }
+
+  /* ---------- Savol-javob ---------- */
+  .faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+  }
+
+  .faq-answer > div {
+    overflow: hidden;
+  }
+
+  .faq-item.is-open .faq-answer {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-answer p {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .faq-item.is-open .faq-answer p {
+    opacity: 1;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ============================================================
+   BIRINCHI EKRAN BALANDLIGI
+
+   `svh` faqat iOS 15.4'dan bor. Ikki marta takrorlangan oddiy e'lon
+   (`88vh` keyin `88svh`) minifikator tomonidan o'chiriladi, shuning uchun
+   fallback'ni @supports bilan yozamiz.
+
+   Balandlik 100% emas, 88% — pastdagi bo'lim chetidan ko'rinib turishi va
+   mijoz saytning davomi borligini bilishi uchun.
+   ============================================================ */
+@layer components {
+  .hero-shell {
+    min-height: 88svh;
+  }
+
+  @supports not (height: 1svh) {
+    .hero-shell {
+      min-height: 88vh;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-shell {
+      min-height: 100svh;
+    }
+
+    @supports not (height: 1svh) {
+      .hero-shell {
+        min-height: 100vh;
+      }
+    }
+  }
+}
+
+/* ============================================================
+   AYLANTIRGANDA PAYDO BO'LISH
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.22, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   QULAYLIK
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .stream,
+  .stream-rev,
+  .ticker,
+  .dot-live,
+  .slide-in,
+  .spin-slow {
+    animation: none;
+  }
+
+  .faq-answer p {
+    opacity: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

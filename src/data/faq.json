@@ -1,0 +1,106 @@
+[
+  {
+    "id": "time",
+    "q": {
+      "uz": "Sayt qancha vaqtda tayyor bo‘ladi?",
+      "ru": "Сколько времени занимает сайт?",
+      "en": "How long does a site take?"
+    },
+    "a": {
+      "uz": "Oddiy sayt 3 soatda tayyor bo‘ladi, kattaroq loyiha 1–2 kunda. Bu siz hech narsa yozib bermaganingizda ham shunday — ma’lumotni Instagram sahifangizdan o‘zimiz olamiz.",
+      "ru": "Простой сайт готов за 3 часа, крупный проект — за 1–2 дня. Это с учётом того, что вам ничего писать не нужно: материал мы берём из вашего Instagram.",
+      "en": "A simple site is ready in 3 hours, a larger project in 1–2 days. That’s without you writing anything — we take the material from your Instagram."
+    }
+  },
+  {
+    "id": "content",
+    "q": {
+      "uz": "Menda matn va surat yo‘q, nima qilamiz?",
+      "ru": "У меня нет текстов и фото, что делать?",
+      "en": "I have no copy or photos — what then?"
+    },
+    "a": {
+      "uz": "Shunisi ham bor. Instagram sahifangizdagi suratlar, xizmatlar va mijoz yozishmalaridan foydalanamiz; matnni o‘zimiz yozamiz va sizga tasdiqlash uchun beramiz. Yetishmagan joyini ochiq aytamiz — o‘ylab topilgan otziv yoki narx yozmaymiz.",
+      "ru": "Так чаще всего и бывает. Берём фото, услуги и переписки с вашей страницы, тексты пишем сами и даём вам на утверждение. О том, чего не хватает, говорим прямо — выдуманных отзывов и цен мы не пишем.",
+      "en": "That's the usual case. We use the photos, services and client messages from your page and write the copy ourselves for you to approve. Anything missing we name openly — we never invent reviews or prices."
+    }
+  },
+  {
+    "id": "price",
+    "q": {
+      "uz": "Narxlarni saytda ko‘rsatish shartmi?",
+      "ru": "Обязательно ли показывать цены на сайте?",
+      "en": "Do I have to show prices?"
+    },
+    "a": {
+      "uz": "Shart emas, lekin biz qat’iy tavsiya qilamiz. Narx ko‘rsatilgan saytga faqat jiddiy mijoz yozadi — «qancha?» degan o‘nlab xabarga javob yozishdan qutulasiz. Xohlasangiz «…dan boshlanadi» ko‘rinishida ham qilamiz.",
+      "ru": "Не обязательно, но мы настойчиво советуем. На сайт с ценами пишут только серьёзные клиенты — вы перестаёте отвечать на десятки «сколько?». Можно сделать и в формате «от …».",
+      "en": "Not required, but we strongly recommend it. With prices up, only serious clients write — you stop answering a dozen “how much?” messages. We can also show “from …”."
+    }
+  },
+  {
+    "id": "edit",
+    "q": {
+      "uz": "Keyinchalik narx yoki matnni o‘zim o‘zgartira olamanmi?",
+      "ru": "Смогу ли я потом сам менять цены и тексты?",
+      "en": "Can I change prices and text myself later?"
+    },
+    "a": {
+      "uz": "Ha. Birinchi oy ichida har qanday o‘zgartirish bepul — bizga yozasiz, biz qilamiz. Studio paketida esa admin panel beriladi: narx, xizmat va suratni o‘zingiz o‘zgartirasiz.",
+      "ru": "Да. В первый месяц любые правки бесплатно — пишете нам, мы вносим. В пакете Studio даётся админ-панель: цены, услуги и фото меняете сами.",
+      "en": "Yes. Any edit in the first month is free — you write, we do it. The Studio package includes an admin panel so you change prices, services and photos yourself."
+    }
+  },
+  {
+    "id": "domain",
+    "q": {
+      "uz": "Domen va xosting qancha turadi?",
+      "ru": "Сколько стоят домен и хостинг?",
+      "en": "What about domain and hosting?"
+    },
+    "a": {
+      "uz": "Xosting birinchi yil bepul — biz ishlatadigan platforma shunday saytlar uchun to‘lov olmaydi. Domen (masalan sizningismingiz.uz) yiliga alohida to‘lanadi, taxminan bir martalik kichik summa. Istasangiz, domensiz ham ishga tushirsa bo‘ladi.",
+      "ru": "Хостинг первый год бесплатно — площадка, которой мы пользуемся, за такие сайты не берёт денег. Домен (например вашеимя.uz) оплачивается отдельно раз в год, это небольшая сумма. Можно запуститься и без своего домена.",
+      "en": "Hosting is free for the first year — the platform we use doesn't charge for sites like these. A domain (say yourname.uz) is a small separate yearly fee. You can also launch without your own domain."
+    }
+  },
+  {
+    "id": "iphone",
+    "q": {
+      "uz": "Saytim eski telefonlarda ham ochiladimi?",
+      "ru": "Откроется ли сайт на старых телефонах?",
+      "en": "Will it open on older phones?"
+    },
+    "a": {
+      "uz": "Ha, va buni biz har bir saytda alohida tekshiramiz. iPhone SE va iPhone 12 da sinab ko‘ramiz: sahifa oppoq ochilmasligi, yon tomonga siljimasligi va hamma tugma ishlashi shart. Ko‘p studiyalar buni tekshirmaydi.",
+      "ru": "Да, и это мы проверяем на каждом сайте отдельно: iPhone SE и iPhone 12 — страница не должна открываться белой, уезжать вбок, кнопки должны работать. Многие студии это не проверяют.",
+      "en": "Yes, and we verify it on every site: iPhone SE and iPhone 12 — the page must not open blank, must not scroll sideways, and every button must work. Most studios skip this."
+    }
+  },
+  {
+    "id": "diff",
+    "q": {
+      "uz": "Tayyor shablondan nimasi bilan farq qiladi?",
+      "ru": "Чем это отличается от готового шаблона?",
+      "en": "How is this different from a template?"
+    },
+    "a": {
+      "uz": "Shablonda ranglar almashtiriladi, xolos. Biz esa har bir saytning rangini mijozning o‘z suratidan olamiz, shrift va bo‘limlar tuzilmasini uning yo‘nalishiga qarab quramiz. Shuning uchun ishlarimizdagi 46 ta sayt bir-biriga o‘xshamaydi — buni ro‘yxatdan o‘zingiz ko‘rishingiz mumkin.",
+      "ru": "В шаблоне просто меняют цвета. Мы берём цвет с собственного фото мастера, а шрифт и структуру разделов строим под его направление. Поэтому 46 наших сайтов не похожи друг на друга — это видно по списку работ.",
+      "en": "A template just gets recoloured. We take the palette from the master's own photo and shape type and sections around their field. That's why our 46 sites don't look alike — you can see it in the list."
+    }
+  },
+  {
+    "id": "start",
+    "q": {
+      "uz": "Qanday boshlaymiz?",
+      "ru": "Как начать?",
+      "en": "How do we start?"
+    },
+    "a": {
+      "uz": "Instagram’ga «SITE» deb yozasiz. Sahifangizni ko‘rib chiqamiz va qaysi paket mos kelishini, qancha vaqt olishini aytamiz — bu bepul va hech narsaga majburlamaydi.",
+      "ru": "Напишите «SITE» в Instagram. Мы посмотрим вашу страницу и скажем, какой пакет подойдёт и сколько времени займёт — бесплатно и ни к чему не обязывает.",
+      "en": "Write “SITE” on Instagram. We'll look at your page and tell you which package fits and how long it takes — free and with no commitment."
+    }
+  }
+]

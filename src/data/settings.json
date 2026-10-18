@@ -1,0 +1,15 @@
+{
+  "origin": "https://voyla.uz",
+  "sections": {
+    "problem": true,
+    "work": true,
+    "features": true,
+    "process": true,
+    "pricing": true,
+    "faq": true,
+    "contact": true
+  },
+  "tickers": true,
+  "grain": true,
+  "stickyCta": true
+}

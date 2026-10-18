@@ -1,0 +1,577 @@
+{
+  "brand": {
+    "name": "Voyla",
+    "tagline": {
+      "uz": "Go‘zallik sohasi uchun web-studiya",
+      "ru": "Веб-студия для бьюти-индустрии",
+      "en": "Web studio for beauty professionals"
+    }
+  },
+  "contacts": {
+    "instagram": "voyla.uz",
+    "instagramUrl": "https://instagram.com/voyla.uz",
+    "telegram": "",
+    "telegramUrl": "",
+    "phone": "",
+    "phoneHref": "",
+    "dmKeyword": "SITE"
+  },
+  "stats": {
+    "sites": 46,
+    "cities": 11,
+    "days": 3
+  },
+  "hero": {
+    "eyebrow": {
+      "uz": "Kosmetologlar uchun sayt",
+      "ru": "Сайты для косметологов",
+      "en": "Websites for cosmetologists"
+    },
+    "titleTop": {
+      "uz": "Mijoz Instagram’da *narx* so‘raydi.",
+      "ru": "Клиент спрашивает *цену* в Instagram.",
+      "en": "Clients ask your *price* in DMs."
+    },
+    "titleAccent": {
+      "uz": "Saytda hammasi yozilgan.",
+      "ru": "На сайте уже всё есть.",
+      "en": "The site already answers."
+    },
+    "text": {
+      "uz": "Biz go‘zallik sohasidagi mutaxassislar uchun sayt quramiz: xizmatlar, ochiq narxlar, ish namunalari va aloqa. Mijoz ko‘radi, ishonadi va o‘zi bog‘lanadi — siz esa bir xil savollarga javob yozib o‘tirmaysiz.",
+      "ru": "Мы делаем сайты для бьюти-мастеров: услуги, открытые цены, работы и контакты. Клиент видит, доверяет и пишет сам — а вы не тратите время на одинаковые ответы.",
+      "en": "We build sites for beauty professionals: services, open prices, real work and contacts. Clients see it, trust it and reach out — without you answering the same DM again."
+    },
+    "primary": {
+      "uz": "Sayt buyurtma qilish",
+      "ru": "Заказать сайт",
+      "en": "Order a site"
+    },
+    "secondary": {
+      "uz": "Ishlarimizni ko‘rish",
+      "ru": "Посмотреть работы",
+      "en": "See our work"
+    },
+    "statsLabel": {
+      "uz": [
+        "tayyor sayt",
+        "shahar",
+        "soatda tayyor"
+      ],
+      "ru": [
+        "готовых сайтов",
+        "городов",
+        "часа на сайт"
+      ],
+      "en": [
+        "sites live",
+        "cities",
+        "hours to launch"
+      ]
+    },
+    "badge": {
+      "uz": "Ishlarimiz",
+      "ru": "Наши работы",
+      "en": "Our work"
+    }
+  },
+  "problem": {
+    "eyebrow": {
+      "uz": "Nega sayt kerak",
+      "ru": "Зачем нужен сайт",
+      "en": "Why a site"
+    },
+    "title": {
+      "uz": "Instagram sotadi. Sayt *ishontiradi*.",
+      "ru": "Instagram продаёт. Сайт *убеждает*.",
+      "en": "Instagram sells. A site *convinces*."
+    },
+    "rows": [
+      {
+        "id": "price",
+        "before": {
+          "uz": "«Narxi qancha?» — kuniga o‘n marta",
+          "ru": "«Сколько стоит?» — десять раз в день",
+          "en": "“How much?” — ten times a day"
+        },
+        "after": {
+          "uz": "Narxlar saytda ochiq turadi",
+          "ru": "Цены открыто указаны на сайте",
+          "en": "Prices are open on the site"
+        }
+      },
+      {
+        "id": "trust",
+        "before": {
+          "uz": "Mijoz sizni tanimaydi, ikkilanadi",
+          "ru": "Клиент вас не знает и сомневается",
+          "en": "A stranger hesitates before writing"
+        },
+        "after": {
+          "uz": "Diplom, ish namunalari va fikrlar bir joyda",
+          "ru": "Дипломы, работы и отзывы в одном месте",
+          "en": "Diplomas, work and reviews in one place"
+        }
+      },
+      {
+        "id": "book",
+        "before": {
+          "uz": "Yozishma cho‘ziladi, mijoz ketib qoladi",
+          "ru": "Переписка затягивается, клиент уходит",
+          "en": "The chat drags on and they drop off"
+        },
+        "after": {
+          "uz": "Savollarga sayt javob beradi — tunda ham",
+          "ru": "На вопросы отвечает сайт — даже ночью",
+          "en": "The site answers — even at night"
+        }
+      },
+      {
+        "id": "find",
+        "before": {
+          "uz": "Google’da sizni topib bo‘lmaydi",
+          "ru": "В Google вас не найти",
+          "en": "Google cannot find you"
+        },
+        "after": {
+          "uz": "Ismingiz bo‘yicha sayt chiqadi",
+          "ru": "По имени выдаётся ваш сайт",
+          "en": "Your name brings up your site"
+        }
+      }
+    ]
+  },
+  "work": {
+    "eyebrow": {
+      "uz": "Ishlarimiz",
+      "ru": "Наши работы",
+      "en": "Our work"
+    },
+    "title": {
+      "uz": "*Haqiqiy* saytlar, haqiqiy mijozlar",
+      "ru": "*Настоящие* сайты, настоящие клиенты",
+      "en": "*Real* sites, real clients"
+    },
+    "text": {
+      "uz": "Quyidagilar — biz qurgan va hozir ishlab turgan saytlar. Har bir kartadagi rasm o‘sha saytning o‘zidan olingan ekran surati.",
+      "ru": "Ниже — сайты, которые мы сделали и которые работают сейчас. Картинка на каждой карточке — настоящий скриншот этого сайта.",
+      "en": "Below are sites we built that are live right now. Every thumbnail is a real screenshot of that site."
+    },
+    "all": {
+      "uz": "Hammasi",
+      "ru": "Все",
+      "en": "All"
+    },
+    "open": {
+      "uz": "Saytni ochish",
+      "ru": "Открыть сайт",
+      "en": "Open site"
+    },
+    "soon": {
+      "uz": "Havola tez orada",
+      "ru": "Ссылка скоро",
+      "en": "Link soon"
+    },
+    "more": {
+      "uz": "Yana ko‘rsatish",
+      "ru": "Показать ещё",
+      "en": "Show more"
+    },
+    "tags": {
+      "video": {
+        "uz": "Video fon",
+        "ru": "Видеофон",
+        "en": "Video hero"
+      },
+      "map": {
+        "uz": "Xarita",
+        "ru": "Карта",
+        "en": "Map"
+      },
+      "price": {
+        "uz": "Ochiq prays",
+        "ru": "Открытый прайс",
+        "en": "Open prices"
+      },
+      "before-after": {
+        "uz": "Oldin / keyin",
+        "ru": "До / после",
+        "en": "Before / after"
+      },
+      "reviews": {
+        "uz": "Mijoz fikrlari",
+        "ru": "Отзывы",
+        "en": "Reviews"
+      },
+      "course": {
+        "uz": "Kurs bo‘limi",
+        "ru": "Обучение",
+        "en": "Course"
+      }
+    },
+    "cityLabel": {
+      "uz": "Barcha shaharlar",
+      "ru": "Все города",
+      "en": "All cities"
+    },
+    "featured": {
+      "uz": "Asosiy",
+      "ru": "Главное",
+      "en": "Featured"
+    }
+  },
+  "features": {
+    "eyebrow": {
+      "uz": "Nima kiradi",
+      "ru": "Что входит",
+      "en": "What's included"
+    },
+    "title": {
+      "uz": "Har bir saytda — *so‘ramasangiz* ham",
+      "ru": "В каждом сайте — даже если *не просили*",
+      "en": "In every site — even if you *don’t ask*"
+    },
+    "items": [
+      {
+        "id": "iphone",
+        "title": {
+          "uz": "Eski iPhone’da ham ochiladi",
+          "ru": "Открывается даже на старом iPhone",
+          "en": "Opens even on an old iPhone"
+        },
+        "text": {
+          "uz": "Har bir sayt iPhone SE va iPhone 12 da sinovdan o‘tadi. Ko‘p studiyalar buni tekshirmaydi — natijada sayt oppoq ochiladi va mijoz ketadi.",
+          "ru": "Каждый сайт проверяется на iPhone SE и iPhone 12. Многие студии это не проверяют — сайт открывается белым, и клиент уходит.",
+          "en": "Every site is tested on iPhone SE and iPhone 12. Most studios skip this — the page opens blank and the client leaves."
+        }
+      },
+      {
+        "id": "lang",
+        "title": {
+          "uz": "Ikki til: o‘zbek va rus",
+          "ru": "Два языка: узбекский и русский",
+          "en": "Two languages: Uzbek and Russian"
+        },
+        "text": {
+          "uz": "Mijozlaringiz ikkala tilda yozadi. Sayt bir bosishda tilni almashtiradi — tarjima xizmati emas, haqiqiy matn.",
+          "ru": "Ваши клиенты пишут на обоих языках. Сайт переключается одним нажатием — это живой текст, а не автоперевод.",
+          "en": "Your clients write in both. The site switches in one tap — real copy, not machine translation."
+        }
+      },
+      {
+        "id": "speed",
+        "title": {
+          "uz": "Bir soniyada yuklanadi",
+          "ru": "Загружается за секунду",
+          "en": "Loads in a second"
+        },
+        "text": {
+          "uz": "Rasm va video saytga qo‘yishdan oldin siqiladi. Sekin sayt — yo‘qotilgan mijoz.",
+          "ru": "Фото и видео сжимаются до публикации. Медленный сайт — потерянный клиент.",
+          "en": "Photos and video are compressed before they ship. A slow site is a lost client."
+        }
+      },
+      {
+        "id": "price",
+        "title": {
+          "uz": "Ochiq prays",
+          "ru": "Открытый прайс",
+          "en": "Open price list"
+        },
+        "text": {
+          "uz": "Narx ko‘rsatilgan sayt keraksiz suhbatni kesadi: faqat jiddiy mijoz yozadi.",
+          "ru": "Сайт с ценами отсекает лишние переписки: пишут только серьёзные клиенты.",
+          "en": "Showing prices filters the chat: only serious clients write."
+        }
+      },
+      {
+        "id": "contact",
+        "title": {
+          "uz": "Aloqa bir bosishda",
+          "ru": "Связь в одно нажатие",
+          "en": "Contact in one tap"
+        },
+        "text": {
+          "uz": "Telegram, Instagram va telefon tugmalari har bir bo‘limda turadi. Mijoz qidirib o‘tirmaydi — bosadi va yozadi.",
+          "ru": "Кнопки Telegram, Instagram и телефона есть в каждом разделе. Клиенту не нужно искать — нажал и написал.",
+          "en": "Telegram, Instagram and phone buttons sit in every section. Nobody has to hunt for them — one tap and they write."
+        }
+      },
+      {
+        "id": "design",
+        "title": {
+          "uz": "Har biri alohida dizayn",
+          "ru": "У каждого свой дизайн",
+          "en": "A design of its own"
+        },
+        "text": {
+          "uz": "Shablon almashtirmaymiz. Ranglar sizning suratingizdan, shrift va tuzilma sizning yo‘nalishingizdan olinadi.",
+          "ru": "Мы не перекрашиваем шаблон. Цвета берутся с вашего фото, шрифт и структура — из вашего направления.",
+          "en": "We don't recolour a template. Colours come from your own photo, type and layout from your field."
+        }
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": {
+      "uz": "Qanday ishlaymiz",
+      "ru": "Как мы работаем",
+      "en": "How we work"
+    },
+    "title": {
+      "uz": "Siz *faqat* Instagram’ingizni berasiz",
+      "ru": "От вас — *только* ваш Instagram",
+      "en": "All we need is *your* Instagram"
+    },
+    "steps": [
+      {
+        "id": "s1",
+        "title": {
+          "uz": "Ma’lumot",
+          "ru": "Материал",
+          "en": "Material"
+        },
+        "text": {
+          "uz": "Instagram sahifangizni o‘rganamiz: xizmatlar, narxlar, suratlar, mijoz fikrlari. Siz hech narsa yozib o‘tirmaysiz.",
+          "ru": "Изучаем ваш Instagram: услуги, цены, фото, отзывы. Вам ничего писать не нужно.",
+          "en": "We study your Instagram: services, prices, photos, reviews. You write nothing."
+        }
+      },
+      {
+        "id": "s2",
+        "title": {
+          "uz": "Dizayn",
+          "ru": "Дизайн",
+          "en": "Design"
+        },
+        "text": {
+          "uz": "Ranglarni suratingizdan olamiz, tuzilmani yo‘nalishingizga qarab quramiz. Birinchi variantni ko‘rasiz.",
+          "ru": "Берём цвета с вашего фото, строим структуру под ваше направление. Показываем первый вариант.",
+          "en": "We pull colours from your photo and shape the layout around your field. You see a first version."
+        }
+      },
+      {
+        "id": "s3",
+        "title": {
+          "uz": "Sinov",
+          "ru": "Проверка",
+          "en": "Testing"
+        },
+        "text": {
+          "uz": "iPhone, Android va kompyuterda tekshiramiz: xato yo‘q, sahifa siljimaydi, hamma tugma ishlaydi.",
+          "ru": "Проверяем на iPhone, Android и компьютере: ошибок нет, страница не едет, кнопки работают.",
+          "en": "We test on iPhone, Android and desktop: no errors, no sideways scroll, every button works."
+        }
+      },
+      {
+        "id": "s4",
+        "title": {
+          "uz": "Ishga tushirish",
+          "ru": "Запуск",
+          "en": "Launch"
+        },
+        "text": {
+          "uz": "Saytni joylaymiz va havolani Instagram bio’ngizga qo‘yasiz. Shu kundan mijoz saytni ko‘rib, hammasini bilgan holda yozadi.",
+          "ru": "Публикуем сайт, вы ставите ссылку в шапку профиля. С этого дня клиент пишет, уже всё зная.",
+          "en": "We publish it, you put the link in your bio. From that day clients write already knowing everything."
+        }
+      }
+    ],
+    "note": {
+      "uz": "soatda sayt tayyor bo‘ladi — ma’lumot to‘liq bo‘lsa.",
+      "ru": "часа на сайт — если материал собран полностью.",
+      "en": "hours to launch — once the material is complete."
+    }
+  },
+  "pricing": {
+    "eyebrow": {
+      "uz": "Narxlar",
+      "ru": "Цены",
+      "en": "Pricing"
+    },
+    "title": {
+      "uz": "*Uch* xil paket",
+      "ru": "*Три* пакета",
+      "en": "*Three* packages"
+    },
+    "note": {
+      "uz": "Narxga domen va joylashtirish kiradi. Birinchi yil xosting bepul. Keyinchalik matn yoki narx o‘zgartirish kerak bo‘lsa — birinchi oy ichida bepul.",
+      "ru": "В стоимость входит домен и размещение. Первый год хостинга бесплатно. Правки текста или цен в первый месяц — бесплатно.",
+      "en": "Domain and deployment are included. First year of hosting is free. Text or price edits in the first month are free."
+    },
+    "popular": {
+      "uz": "Ko‘p tanlanadi",
+      "ru": "Чаще выбирают",
+      "en": "Most chosen"
+    },
+    "cta": {
+      "uz": "Shu paketni tanlash",
+      "ru": "Выбрать пакет",
+      "en": "Choose this"
+    }
+  },
+  "faqSection": {
+    "eyebrow": {
+      "uz": "Savollar",
+      "ru": "Вопросы",
+      "en": "FAQ"
+    },
+    "title": {
+      "uz": "Ko‘p so‘raladigan *savollar*",
+      "ru": "Частые *вопросы*",
+      "en": "Frequently *asked*"
+    }
+  },
+  "contact": {
+    "eyebrow": {
+      "uz": "Bog‘lanish",
+      "ru": "Связаться",
+      "en": "Get in touch"
+    },
+    "title": {
+      "uz": "Saytingizni *boshlaymizmi?*",
+      "ru": "*Начнём* ваш сайт?",
+      "en": "Shall we *start* your site?"
+    },
+    "text": {
+      "uz": "Instagram’ga «SITE» deb yozing — sahifangizni ko‘rib, qaysi paket mos kelishini va qancha vaqt olishini aytamiz. Bu bepul.",
+      "ru": "Напишите «SITE» в Instagram — посмотрим вашу страницу и скажем, какой пакет подойдёт и сколько займёт. Это бесплатно.",
+      "en": "Write “SITE” on Instagram — we'll look at your page and tell you which package fits and how long it takes. Free."
+    },
+    "instagram": {
+      "uz": "Instagram’ga yozish",
+      "ru": "Написать в Instagram",
+      "en": "Message on Instagram"
+    },
+    "telegram": {
+      "uz": "Telegram’da yozish",
+      "ru": "Написать в Telegram",
+      "en": "Message on Telegram"
+    }
+  },
+  "footer": {
+    "pages": {
+      "uz": "Bo‘limlar",
+      "ru": "Разделы",
+      "en": "Sections"
+    },
+    "contacts": {
+      "uz": "Aloqa",
+      "ru": "Связь",
+      "en": "Contact"
+    },
+    "rights": {
+      "uz": "Barcha huquqlar himoyalangan.",
+      "ru": "Все права защищены.",
+      "en": "All rights reserved."
+    }
+  },
+  "nav": {
+    "work": {
+      "uz": "Ishlar",
+      "ru": "Работы",
+      "en": "Work"
+    },
+    "features": {
+      "uz": "Nima kiradi",
+      "ru": "Что входит",
+      "en": "Included"
+    },
+    "process": {
+      "uz": "Jarayon",
+      "ru": "Процесс",
+      "en": "Process"
+    },
+    "pricing": {
+      "uz": "Narxlar",
+      "ru": "Цены",
+      "en": "Pricing"
+    },
+    "faq": {
+      "uz": "Savollar",
+      "ru": "Вопросы",
+      "en": "FAQ"
+    },
+    "contact": {
+      "uz": "Bog‘lanish",
+      "ru": "Связаться",
+      "en": "Contact"
+    }
+  },
+  "ui": {
+    "menu": {
+      "uz": "Menyu",
+      "ru": "Меню",
+      "en": "Menu"
+    },
+    "close": {
+      "uz": "Yopish",
+      "ru": "Закрыть",
+      "en": "Close"
+    },
+    "language": {
+      "uz": "Til",
+      "ru": "Язык",
+      "en": "Language"
+    },
+    "order": {
+      "uz": "Buyurtma",
+      "ru": "Заказать",
+      "en": "Order"
+    }
+  },
+  "meta": {
+    "uz": {
+      "title": "Voyla — kosmetologlar uchun sayt | Web-studiya",
+      "description": "Go‘zallik sohasi mutaxassislari uchun saytlar: ochiq narxlar, ish namunalari, o‘zbek va rus tillari. 46 ta tayyor sayt, 3 soatda ishga tushadi."
+    },
+    "ru": {
+      "title": "Voyla — сайты для косметологов | Веб-студия",
+      "description": "Сайты для бьюти-мастеров: открытые цены, работы, узбекский и русский языки. 46 готовых сайтов, запуск за 3 часа."
+    },
+    "en": {
+      "title": "Voyla — websites for cosmetologists | Web studio",
+      "description": "Websites for beauty professionals: open prices, real work, Uzbek and Russian. 46 sites live, launched in 3 hours."
+    }
+  },
+  "ticker": {
+    "uz": [
+      "O‘zbek va rus tilida",
+      "iPhone’da tekshirilgan",
+      "Ochiq narxlar",
+      "Birinchi yil xosting bepul"
+    ],
+    "ru": [
+      "Узбекский и русский",
+      "Проверено на iPhone",
+      "Открытые цены",
+      "Первый год хостинга бесплатно"
+    ],
+    "en": [
+      "Uzbek and Russian",
+      "Tested on iPhone",
+      "Open prices",
+      "First year of hosting free"
+    ]
+  },
+  "ticker2": {
+    "uz": [
+      "Shablon emas",
+      "Har bir sayt — alohida dizayn",
+      "Ranglar sizning suratingizdan",
+      "Birinchi oy tuzatishlar bepul"
+    ],
+    "ru": [
+      "Не шаблон",
+      "У каждого свой дизайн",
+      "Цвета с вашего фото",
+      "Правки в первый месяц бесплатно"
+    ],
+    "en": [
+      "Not a template",
+      "A design of its own",
+      "Colours from your photo",
+      "First month of edits free"
+    ]
+  }
+}
