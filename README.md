@@ -69,7 +69,7 @@ oldin eski nusxa `.admin-backups/` ga olinadi (oxirgi 20 tasi saqlanadi).
 
 | Bo'lim | Nima qilinadi |
 | --- | --- |
-| **Loyihalar** | Ish qo'shish va o'chirish, ekran surati yuklash, havola, ism, shahar. Qidiruv va «faqat havolasizlari» filtri bor. «Asosiy» belgilangani portfolioda birinchi turadi, «ko'rsatilmasin» — umuman chiqmaydi |
+| **Loyihalar** | Ish qo'shish va o'chirish, havola, ism, shahar. **Havola yozilgach ekran surati o'zi olinadi** (telefon ko'rinishida, 420px webp) — kerak bo'lsa qo'lda ham yuklash mumkin. Qidiruv va «faqat havolasizlari» filtri bor. «Asosiy» belgilangani portfolioda birinchi turadi, «ko'rsatilmasin» — umuman chiqmaydi |
 | **Paketlar** | Start / Pro / Studio: narx, muddat, ichidagi ro'yxat |
 | **Fikrlar** | Mijoz fikrlari: skrinshot yuklash, ism/izoh, tartib, o'chirish. Surat brauzerda o'zi kichraytiriladi |
 | **Savollar** | Savol qo'shish, o'chirish, tartibini almashtirish |
@@ -186,6 +186,26 @@ Bog'lanish       bir varaq tekis marjon — saytdagi yagona to'q rangli yuza
 **Shriftlar:** Unbounded (geometrik) + Playfair Display qiya (serif) + Manrope
 (matn). Har sarlavhada bitta so'z serifga o'tadi — saytning imzosi. Uchalasi
 ham loyiha ichida yotadi, Google'dan yuklanmaydi.
+
+### Ekran surati qanday olinadi
+
+Yangi loyihaga havola yozib, maydondan chiqsangiz, panel saytning birinchi
+ekranini o'zi suratga oladi. Tartib:
+
+1. `api/shot.js` tashqi xizmatdan **telefon ko'rinishidagi** suratni oladi
+   (asosiysi — microlink; ishlamasa thum.io va mshots sinaladi)
+2. Surat panelga qaytariladi, **brauzerda** 420px kenglikdagi webp'ga
+   aylantiriladi (600 KB → ~25 KB)
+3. Odatdagi surat yuklash yo'li bilan saqlanadi
+
+Nega kompyuter emas, telefon ko'rinishi: portfoliodagi qolgan suratlar
+telefon ekranidan olingan, aralashib ketsa to'r tartibsiz ko'rinadi.
+
+Nega siqish brauzerda: Vercel funksiyasida rasm qayta ishlaydigan kutubxona
+(`sharp`) yo'q, brauzerda esa bu bepul va tez.
+
+Surat olinmasa (sayt ochilmasa yoki xizmat javob bermasa) xabar chiqadi va
+«Surat qo'shish» tugmasi orqali qo'lda yuklaysiz.
 
 ## 5. Tuzilishi
 

@@ -26,6 +26,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, unlink
 import { join, extname, normalize } from 'node:path';
 import { spawn } from 'node:child_process';
 import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
+import { grabScreenshot } from '../api/_lib/screenshot.js';
 
 const here = (rel) => decodeURIComponent(new URL(rel, import.meta.url).pathname).replace(/^\/([A-Za-z]:)/, '$1');
 const ROOT = here('../');
@@ -301,6 +302,20 @@ const server = createServer(async (req, res) => {
       writeFileSync(join(PUBLIC, folder, name), Buffer.from(base64, 'base64'));
 
       return json(res, 200, { ok: true, url: `/${folder}/${name}` });
+    }
+
+    /**
+     * Sayt havolasidan ekran surati oladi.
+     * Internetdagi panel bilan bir xil kod ishlatiladi (`api/_lib/screenshot.js`).
+     */
+    if (path === '/api/shot' && req.method === 'POST') {
+      const payload = JSON.parse(await body(req));
+      try {
+        const { buffer, type, source } = await grabScreenshot(payload.url, 24_000);
+        return json(res, 200, { ok: true, source, dataUrl: `data:${type};base64,${buffer.toString('base64')}` });
+      } catch (error) {
+        return json(res, 500, { error: error.message });
+      }
     }
 
     /** Login va parolni almashtirish */

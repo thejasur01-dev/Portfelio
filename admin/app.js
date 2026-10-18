@@ -281,6 +281,50 @@ function renderPortfolio() {
     render();
   };
 
+  /**
+   * Sayt havolasidan ekran suratini O'ZI oladi.
+   *
+   * Havola kiritilib, maydondan chiqilganda ishga tushadi — shuning uchun
+   * odatda hech narsa bosish kerak emas. Surat olinmasa (sayt ochilmasa)
+   * xabar chiqadi va qo'lda yuklash tugmasi joyida qolaveradi.
+   */
+  const shoot = async (item) => {
+    if (!item.url) return;
+    const status = document.getElementById('status');
+    status.className = 'status';
+    status.textContent = 'sayt surati olinmoqda…';
+
+    try {
+      const response = await fetch('/api/shot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: item.url }),
+      });
+
+      if (response.status === 401) {
+        showGate();
+        return;
+      }
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.dataUrl) throw new Error(result.error ?? 'Surat olinmadi');
+
+      // Xom surat katta (~600 KB). Uni odatdagi yo'l bilan kichraytirib
+      // yuklaymiz — repozitoriyga 420px webp bo'lib tushadi.
+      status.textContent = 'surat saqlanmoqda…';
+      const blob = await (await fetch(result.dataUrl)).blob();
+      const url = await uploadImage(blob, 'work', 420);
+      if (!url) return;
+
+      item.image = url;
+      markDirty('portfolio');
+      render();
+    } catch (error) {
+      status.className = 'status dirty';
+      status.textContent = error.message;
+    }
+  };
+
   /** Ekran surati: brauzerda kichraytirilib yuklanadi */
   const setImage = (item) =>
     pickImage(async (file) => {
@@ -308,6 +352,11 @@ function renderPortfolio() {
       badge.className = `badge ${item.url ? 'live' : 'none'}`;
       badge.textContent = item.url ? 'havola bor' : 'havola yo‘q';
       markDirty('portfolio');
+    });
+
+    // Havola yozilib bo'lingach: surati yo'q loyihaga suratni o'zi oladi
+    url.addEventListener('blur', () => {
+      if (item.url && !item.image) shoot(item);
     });
 
     const field = (key) => {
@@ -360,6 +409,9 @@ function renderPortfolio() {
           ]),
 
           el('div', { class: 'toggles' }, [
+            item.url
+              ? el('button', { class: 'ghost', text: 'Saytdan surat olish', onclick: () => shoot(item) })
+              : null,
             el('button', {
               class: 'ghost',
               text: item.image ? 'Suratni almashtirish' : 'Surat qo‘shish',
@@ -400,6 +452,8 @@ function renderPortfolio() {
  * qaytaradi — shuning uchun natija tekshiriladi va kerak bo'lsa jpeg olinadi.
  */
 async function shrink(file, maxWidth = 900, quality = 0.82) {
+  // Ekran suratlari 420px bo'ladi (portfoliodagi qolganlari bilan bir xil),
+  // mijoz fikrlari esa kattaroq — yozishmadagi matn o'qilishi kerak
   const bitmap = await createImageBitmap(file);
   const scale = Math.min(1, maxWidth / bitmap.width);
 
@@ -425,8 +479,8 @@ function pickImage(onPick) {
 }
 
 /** Suratni serverga yuboradi va saytdagi manzilini qaytaradi */
-async function uploadImage(file, folder) {
-  const dataUrl = await shrink(file);
+async function uploadImage(file, folder, maxWidth) {
+  const dataUrl = await shrink(file, maxWidth);
   const response = await fetch('/api/upload', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
