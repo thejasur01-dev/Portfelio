@@ -341,7 +341,10 @@ const server = createServer(async (req, res) => {
     // `auth.json` hech qachon berilmaydi — u shu papkada yotadi
     if (path.endsWith('auth.json')) return send(res, 403, 'mumkin emas', 'text/plain');
 
-    const file = normalize(join(ADMIN, path === '/' ? 'index.html' : path));
+    // Sahifa skriptni `/admin/app.js` deb so'raydi (internetdagi manzil bilan
+    // bir xil bo'lishi uchun) — bu yerda `/admin` qo'shimchasi olib tashlanadi
+    const inner = path.replace(/^\/admin(?=\/|$)/, '') || '/';
+    const file = normalize(join(ADMIN, inner === '/' ? 'index.html' : inner));
     if (!file.startsWith(normalize(ADMIN))) return send(res, 403, 'mumkin emas', 'text/plain');
     return serveFile(res, file);
   } catch (error) {

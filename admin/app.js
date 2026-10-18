@@ -1002,6 +1002,8 @@ window.addEventListener('beforeunload', (event) => {
   if (state.dirty.size) event.preventDefault();
 });
 
+window.voylaAdminReady = true;
+
 // Allaqachon kirilganmi? Kirilgan bo'lsa panel darhol ochiladi.
 fetch('/api/me')
   .then((response) => (response.ok ? enter() : showGate()))

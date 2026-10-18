@@ -433,6 +433,23 @@
     <nav id="tabs"></nav>
     <main id="view"></main>
 
-    <script src="/app.js"></script>
+    <!--
+      Manzil ataylab to'liq yozilgan (`/admin/app.js`), nisbiy emas.
+      Internetda sahifa `/admin` manzilida ham, `/admin/` manzilida ham
+      ochilishi mumkin; nisbiy `./app.js` birinchi holatda `/app.js` ga
+      aylanib ketadi va topilmaydi. Mahalliy server esa `/admin` qo'shimchasini
+      o'zi olib tashlaydi, shuning uchun ikkala joyda ham ishlaydi.
+    -->
+    <script src="/admin/app.js"></script>
+
+    <script>
+      // Skript yuklanmay qolsa sahifa jim qoladi — buni aytib turamiz
+      setTimeout(() => {
+        if (!window.voylaAdminReady) {
+          document.getElementById('status').textContent = 'Panel yuklanmadi — sahifani yangilang (Ctrl+Shift+R)';
+          document.getElementById('status').className = 'status dirty';
+        }
+      }, 6000);
+    </script>
   </body>
 </html>
