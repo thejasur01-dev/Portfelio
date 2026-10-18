@@ -4,12 +4,13 @@
     "problem": true,
     "work": true,
     "features": true,
+    "reviews": true,
     "process": true,
     "pricing": true,
     "faq": true,
     "contact": true
   },
-  "tickers": true,
+  "tickers": false,
   "grain": true,
   "stickyCta": true
 }

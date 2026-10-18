@@ -1,6 +1,7 @@
 import SectionHead from './SectionHead';
 import Reveal from './Reveal';
 import { useLanguage } from '../i18n/useLanguage';
+import { sectionIndex } from '../lib/sectionIndex';
 
 /**
  * Jarayon — to'rt qadam.
@@ -18,7 +19,7 @@ export default function Process() {
   return (
     <section id="process" className="relative overflow-hidden px-5 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-[78rem]">
-        <SectionHead eyebrow={tr(flow.eyebrow)} title={tr(flow.title)} index="04" />
+        <SectionHead eyebrow={tr(flow.eyebrow)} title={tr(flow.title)} index={sectionIndex('process')} />
 
         <div className="relative mt-12 sm:mt-16">
           {/* Qadamlarni bog'lab turadigan chiziq */}

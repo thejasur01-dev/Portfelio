@@ -4,6 +4,7 @@ import Ticker from './components/Ticker';
 import Problem from './components/Problem';
 import Work from './components/Work';
 import Features from './components/Features';
+import Reviews from './components/Reviews';
 import Process from './components/Process';
 import Pricing from './components/Pricing';
 import Faq from './components/Faq';
@@ -34,7 +35,7 @@ export default function App() {
   ];
 
   // Tab bosilganda sakrab o'tiladigan joy: ko'rinib turgan birinchi bo'lim
-  const firstVisible = ['work', 'features', 'pricing', 'contact'].find((id) => show[id]) ?? 'top';
+  const firstVisible = ['work', 'reviews', 'features', 'pricing', 'contact'].find((id) => show[id]) ?? 'top';
 
   return (
     <>
@@ -58,6 +59,7 @@ export default function App() {
         {show.work ? <Work /> : null}
         {show.features ? <Features /> : null}
         {settings.tickers === false ? null : <Ticker items={tr(site.ticker2)} tone="paper" tilt={1.3} slow />}
+        {show.reviews ? <Reviews /> : null}
         {show.process ? <Process /> : null}
         {show.pricing ? <Pricing /> : null}
         {show.faq ? <Faq /> : null}

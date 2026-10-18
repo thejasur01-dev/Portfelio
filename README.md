@@ -69,8 +69,9 @@ oldin eski nusxa `.admin-backups/` ga olinadi (oxirgi 20 tasi saqlanadi).
 
 | Bo'lim | Nima qilinadi |
 | --- | --- |
-| **Loyihalar** | 46 ta ishning havolasi, ismi, shahri. Qidiruv va «faqat havolasizlari» filtri bor. «Asosiy» belgilangani portfolioda birinchi turadi, «ko'rsatilmasin» — umuman chiqmaydi |
+| **Loyihalar** | Ish qo'shish va o'chirish, ekran surati yuklash, havola, ism, shahar. Qidiruv va «faqat havolasizlari» filtri bor. «Asosiy» belgilangani portfolioda birinchi turadi, «ko'rsatilmasin» — umuman chiqmaydi |
 | **Paketlar** | Start / Pro / Studio: narx, muddat, ichidagi ro'yxat |
+| **Fikrlar** | Mijoz fikrlari: skrinshot yuklash, ism/izoh, tartib, o'chirish. Surat brauzerda o'zi kichraytiriladi |
 | **Savollar** | Savol qo'shish, o'chirish, tartibini almashtirish |
 | **Matnlar** | Saytdagi barcha yozuvlar, aloqa ma'lumotlari, raqamlar, yuguruvchi lenta |
 | **Sozlamalar** | Domen · qaysi bo'limlar ko'rinishi · lenta/parda/pastdagi tugma · panel logini va paroli |
@@ -93,6 +94,50 @@ Mijoz Instagram'da *narx* so'raydi.
 
 Bu saytning imzosi — har bir sarlavhada bitta so'z shakl o'zgartiradi. HTML
 yozish kerak emas, oddiy matn maydonida ishlaydi.
+
+---
+
+## 2b. Admin panel internetda (Vercel)
+
+Panel ikki joyda ishlaydi va ikkalasi ham bir xil ko'rinadi:
+
+| Qayerda | Manzil | Ma'lumot qayerga yoziladi |
+| --- | --- | --- |
+| Kompyuterda | `http://localhost:4455` | To'g'ridan-to'g'ri `src/data/*.json` fayllariga |
+| Internetda | `https://voylauz.vercel.app/admin` | GitHub repozitoriyasiga (commit qilinadi) |
+
+Internetdagi panelda **«Saqlash» = e'lon qilish**: o'zgarish GitHub'ga commit
+bo'ladi, Vercel buni ko'rib saytni bir-ikki daqiqada qayta yig'adi. Alohida
+«yig'ish» tugmasi yo'q.
+
+### Vercel'da bir martalik sozlash
+
+Vercel → loyiha → **Settings → Environment Variables** ga quyidagilarni
+qo'shasiz (Production, Preview, Development — uchalasiga):
+
+| Nomi | Qiymati |
+| --- | --- |
+| `ADMIN_LOGIN` | `jasur` |
+| `ADMIN_PASSWORD` | **uzun parol** (kamida 10 belgi) |
+| `SESSION_SECRET` | tasodifiy uzun satr |
+| `GITHUB_REPO` | `thejasur01-dev/Portfelio` |
+| `GITHUB_TOKEN` | GitHub'dan olingan token (pastda) |
+| `GITHUB_BRANCH` | `main` (ixtiyoriy) |
+
+**GITHUB_TOKEN qanday olinadi:**
+GitHub → Settings → Developer settings → **Personal access tokens →
+Fine-grained tokens** → *Generate new token* → faqat `Portfelio`
+repozitoriyasini tanlang → **Repository permissions → Contents: Read and write**
+→ tokenni ko'chirib oling.
+
+> **Parol haqida.** Panel endi internetda turibdi: `1` kabi qisqa parol
+> havolani topgan odamga saytingizni o'zgartirish imkonini beradi. Panel
+> parol 10 belgidan qisqa bo'lsa qizil ogohlantirish ko'rsatadi.
+> Kompyuterdagi panel esa faqat `127.0.0.1` dan ochiladi — u yerda parol
+> `jasur` / `1` bo'lib qolaveradi.
+
+Sozlagandan keyin Vercel'da **Redeploy** qilasiz — shundan keyin
+`/admin` ishlay boshlaydi.
 
 ---
 
@@ -150,7 +195,8 @@ src/
     site.json         barcha yozuvlar (uz/ru/en)
     packages.json     Start / Pro / Studio
     faq.json          savol-javob
-    portfolio.json    46 ta ish + havolalar
+    portfolio.json    ishlar + havolalar
+    reviews.json      mijoz fikrlari (skrinshotlar)
     settings.json     domen, qaysi bo'lim ko'rinishi, qo'shimchalar
   components/     ← ko'rinish
   i18n/           ← til almashtirish (uz / ru / en)
@@ -163,8 +209,12 @@ scripts/
   make-brand-assets.mjs belgichalar va og-cover.jpg
   make-seo.mjs          index.html ichidagi JSON-LD (build o'zi chaqiradi)
   fetch-fonts.mjs       shriftlarni public/fonts/ ga ko'chiradi
+api/              ← Vercel uchun serverless funksiyalar (internetdagi panel)
+  _lib/github.js    ma'lumotni GitHub'ga commit qiladi
+  _lib/auth.js      kirish va imzolangan chipta
 public/
-  work/           ← 45 ta mijoz saytining ekran surati (420px webp)
+  work/           ← mijoz saytlarining ekran suratlari (420px webp)
+  reviews/        ← mijoz fikrlari skrinshotlari
   fonts/          ← shriftlar
 ```
 

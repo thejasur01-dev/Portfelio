@@ -2,7 +2,7 @@ import { InstagramIcon, TelegramIcon, VoylaMark } from './BrandIcons';
 import { useLanguage } from '../i18n/useLanguage';
 import settings from '../data/settings.json';
 
-const SECTIONS = ['work', 'features', 'process', 'pricing', 'faq'].filter((id) => settings.sections?.[id]);
+const SECTIONS = ['work', 'features', 'reviews', 'process', 'pricing', 'faq'].filter((id) => settings.sections?.[id]);
 
 // Chizishdan tashqarida hisoblanadi — har qayta chizilganda o'zgarmasin
 const YEAR = new Date().getFullYear();

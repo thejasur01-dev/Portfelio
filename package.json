@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/make-seo.mjs && vite build",
+    "build": "node scripts/make-seo.mjs && vite build && node scripts/copy-admin.mjs",
     "preview": "vite preview",
     "lint": "oxlint",
     "admin": "node scripts/admin-server.mjs",

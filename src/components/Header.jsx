@@ -6,7 +6,7 @@ import settings from '../data/settings.json';
 
 // Menyuda faqat sozlamalarda yoqilgan bo'limlar turadi — aks holda havola
 // mavjud bo'lmagan joyga olib borardi.
-const SECTIONS = ['work', 'features', 'process', 'pricing', 'faq'].filter((id) => settings.sections?.[id]);
+const SECTIONS = ['work', 'features', 'reviews', 'process', 'pricing', 'faq'].filter((id) => settings.sections?.[id]);
 
 /**
  * UZ / RU / EN almashtirgich.

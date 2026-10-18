@@ -496,6 +496,11 @@
       "uz": "Bog‘lanish",
       "ru": "Связаться",
       "en": "Contact"
+    },
+    "reviews": {
+      "uz": "Fikrlar",
+      "ru": "Отзывы",
+      "en": "Reviews"
     }
   },
   "ui": {
@@ -573,5 +578,32 @@
       "Colours from your photo",
       "First month of edits free"
     ]
+  },
+  "reviews": {
+    "eyebrow": {
+      "uz": "Mijoz fikrlari",
+      "ru": "Отзывы",
+      "en": "What clients say"
+    },
+    "title": {
+      "uz": "Mijozlar nima *deydi*",
+      "ru": "Что говорят *клиенты*",
+      "en": "What clients *say*"
+    },
+    "text": {
+      "uz": "Quyidagilar — yozishmalardan olingan ekran suratlari. Matn o‘zgartirilmagan.",
+      "ru": "Ниже — скриншоты переписок. Текст не менялся.",
+      "en": "Below are screenshots of real chats. Nothing was edited."
+    },
+    "open": {
+      "uz": "Kattalashtirish",
+      "ru": "Увеличить",
+      "en": "Enlarge"
+    },
+    "close": {
+      "uz": "Yopish",
+      "ru": "Закрыть",
+      "en": "Close"
+    }
   }
 }

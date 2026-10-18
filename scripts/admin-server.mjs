@@ -31,13 +31,16 @@ const here = (rel) => decodeURIComponent(new URL(rel, import.meta.url).pathname)
 const ROOT = here('../');
 const DATA = join(ROOT, 'src/data');
 const ADMIN = join(ROOT, 'admin');
-const WORK = join(ROOT, 'public/work');
+const PUBLIC = join(ROOT, 'public');
+
+// Surat yuklash mumkin bo'lgan papkalar
+const FOLDERS = new Set(['reviews', 'work']);
 const BACKUPS = join(ROOT, '.admin-backups');
 const AUTH = join(ADMIN, 'auth.json');
 const PORT = 4455;
 
 // Tahrirlash mumkin bo'lgan fayllar. Boshqa hech qanday fayl yozilmaydi.
-const FILES = ['site', 'packages', 'faq', 'portfolio', 'settings'];
+const FILES = ['site', 'packages', 'faq', 'portfolio', 'reviews', 'settings'];
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -237,7 +240,9 @@ const server = createServer(async (req, res) => {
     }
 
     if (path === '/api/me') {
-      return signedIn(req) ? json(res, 200, { ok: true, login: readAuth().login }) : json(res, 401, { error: 'kirilmagan' });
+      return signedIn(req)
+        ? json(res, 200, { ok: true, login: readAuth().login, mode: 'local' })
+        : json(res, 401, { error: 'kirilmagan' });
     }
 
     // ---------- Qolgan hamma API faqat kirgandan keyin ----------
@@ -248,17 +253,54 @@ const server = createServer(async (req, res) => {
     if (path === '/api/state') {
       const state = {};
       FILES.forEach((name) => (state[name] = readData(name)));
-      return json(res, 200, { files: state, cwd: ROOT, login: readAuth().login });
+      return json(res, 200, { files: state, cwd: ROOT, login: readAuth().login, mode: 'local' });
     }
 
     if (path === '/api/save' && req.method === 'POST') {
       const payload = JSON.parse(await body(req));
-      if (!FILES.includes(payload.file)) return json(res, 400, { error: 'bunday fayl yo‘q' });
-      if (payload.data === undefined) return json(res, 400, { error: 'ma‘lumot yo‘q' });
+      // Bitta fayl ham, ro'yxat ham bir xil ko'rinishda qabul qilinadi
+      const list = Array.isArray(payload.files) ? payload.files : [{ file: payload.file, data: payload.data }];
+      const bad = list.find((item) => !FILES.includes(item.file) || item.data === undefined);
+      if (bad) return json(res, 400, { error: `«${bad.file}» saqlanmaydi` });
 
-      backup(payload.file);
-      writeFileSync(join(DATA, `${payload.file}.json`), `${JSON.stringify(payload.data, null, 2)}\n`, 'utf8');
+      list.forEach((item) => {
+        backup(item.file);
+        writeFileSync(join(DATA, `${item.file}.json`), `${JSON.stringify(item.data, null, 2)}\n`, 'utf8');
+      });
       return json(res, 200, { ok: true, savedAt: new Date().toISOString() });
+    }
+
+    /**
+     * Surat yuklash va o'chirish.
+     *
+     * Surat brauzerda kichraytirilib, webp'ga o'girilgan holda keladi.
+     * Fayl nomini foydalanuvchi bermaydi — o'zimiz o'ylab topamiz, aks holda
+     * nomga `../` yozib boshqa papkaga fayl tiqish mumkin bo'lardi.
+     */
+    if (path === '/api/upload' && req.method === 'POST') {
+      const payload = JSON.parse(await body(req));
+
+      if (payload.remove) {
+        const rel = String(payload.remove).replace(/^\//, '');
+        const folder = rel.split('/')[0];
+        if (!FOLDERS.has(folder)) return json(res, 400, { error: 'bunday faylni o‘chirib bo‘lmaydi' });
+        const file = normalize(join(PUBLIC, rel));
+        if (file.startsWith(normalize(PUBLIC)) && existsSync(file)) unlinkSync(file);
+        return json(res, 200, { ok: true });
+      }
+
+      const folder = String(payload.folder ?? 'reviews');
+      if (!FOLDERS.has(folder)) return json(res, 400, { error: 'papka noto‘g‘ri' });
+
+      const match = String(payload.dataUrl ?? '').match(/^data:image\/(webp|jpeg|png);base64,(.+)$/);
+      if (!match) return json(res, 400, { error: 'surat o‘qilmadi' });
+
+      const [, kind, base64] = match;
+      const name = `${Date.now().toString(36)}-${randomBytes(3).toString('hex')}.${kind === 'jpeg' ? 'jpg' : kind}`;
+      mkdirSync(join(PUBLIC, folder), { recursive: true });
+      writeFileSync(join(PUBLIC, folder, name), Buffer.from(base64, 'base64'));
+
+      return json(res, 200, { ok: true, url: `/${folder}/${name}` });
     }
 
     /** Login va parolni almashtirish */
@@ -286,10 +328,12 @@ const server = createServer(async (req, res) => {
       return json(res, 200, { ok: result.ok, output: result.output.slice(-6000) });
     }
 
-    // ---------- Rasmlar ----------
-    if (path.startsWith('/work/')) {
-      const file = normalize(join(WORK, path.slice('/work/'.length)));
-      if (!file.startsWith(normalize(WORK))) return send(res, 403, 'mumkin emas', 'text/plain');
+    // ---------- Suratlar ----------
+    // Panelda loyiha ekranlari va mijoz fikrlari ko'rinishi uchun
+    const folder = path.split('/')[1];
+    if (FOLDERS.has(folder)) {
+      const file = normalize(join(PUBLIC, path.replace(/^\//, '')));
+      if (!file.startsWith(normalize(PUBLIC))) return send(res, 403, 'mumkin emas', 'text/plain');
       return serveFile(res, file);
     }
 

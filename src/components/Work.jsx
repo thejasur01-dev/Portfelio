@@ -3,6 +3,7 @@ import { ArrowUpRight, Clock3 } from 'lucide-react';
 import SectionHead from './SectionHead';
 import Reveal from './Reveal';
 import { useLanguage } from '../i18n/useLanguage';
+import { sectionIndex } from '../lib/sectionIndex';
 import portfolio from '../data/portfolio.json';
 
 const STEP = 9;
@@ -154,7 +155,7 @@ export default function Work() {
   return (
     <section id="work" className="section-light -mt-6 px-5 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-[78rem]">
-        <SectionHead eyebrow={tr(work.eyebrow)} title={tr(work.title)} text={tr(work.text)} index="02" tone="light" />
+        <SectionHead eyebrow={tr(work.eyebrow)} title={tr(work.title)} text={tr(work.text)} index={sectionIndex('work')} tone="light" />
 
         {/* ---------- Filtrlar ---------- */}
         <Reveal delay={180} className="mt-10 sm:mt-12">

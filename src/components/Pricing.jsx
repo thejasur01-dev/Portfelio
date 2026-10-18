@@ -3,6 +3,7 @@ import SectionHead from './SectionHead';
 import Reveal from './Reveal';
 import { InstagramIcon } from './BrandIcons';
 import { useLanguage } from '../i18n/useLanguage';
+import { sectionIndex } from '../lib/sectionIndex';
 import packages from '../data/packages.json';
 
 /**
@@ -23,7 +24,7 @@ export default function Pricing() {
   return (
     <section id="pricing" className="section-light -mt-6 px-5 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-[78rem]">
-        <SectionHead eyebrow={tr(pricing.eyebrow)} title={tr(pricing.title)} index="05" tone="light" />
+        <SectionHead eyebrow={tr(pricing.eyebrow)} title={tr(pricing.title)} index={sectionIndex('pricing')} tone="light" />
 
         <ul className="mt-12 grid items-stretch gap-4 sm:mt-14 lg:grid-cols-3 lg:gap-5">
           {packages.map((plan, index) => {

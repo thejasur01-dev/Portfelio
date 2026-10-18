@@ -3,6 +3,7 @@ import { Plus } from 'lucide-react';
 import SectionHead from './SectionHead';
 import Reveal from './Reveal';
 import { useLanguage } from '../i18n/useLanguage';
+import { sectionIndex } from '../lib/sectionIndex';
 import faq from '../data/faq.json';
 
 /**
@@ -26,7 +27,7 @@ export default function Faq() {
         <div className="grid gap-10 lg:grid-cols-[23rem_1fr] lg:gap-16">
           {/* Katta ekranda sarlavha chapda yopishib turadi */}
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SectionHead eyebrow={tr(site.faqSection.eyebrow)} title={tr(site.faqSection.title)} index="06" />
+            <SectionHead eyebrow={tr(site.faqSection.eyebrow)} title={tr(site.faqSection.title)} index={sectionIndex('faq')} />
           </div>
 
           <ul>

@@ -13,6 +13,7 @@ const state = {
   files: {},
   dirty: new Set(),
   tab: 'portfolio',
+  mode: 'local',
   lang: 'uz',
   search: '',
   onlyMissing: false,
@@ -253,6 +254,47 @@ function renderPortfolio() {
     render();
   };
 
+  /** Yangi loyiha — ro'yxat boshiga qo'shiladi, shunda darhol ko'rinadi */
+  const add = () => {
+    list.unshift({
+      id: newId('loyiha'),
+      name: '',
+      role: '',
+      city: '',
+      instagram: '',
+      tags: [],
+      image: '',
+      url: '',
+      featured: false,
+      hidden: false,
+    });
+    state.search = '';
+    state.onlyMissing = false;
+    markDirty('portfolio');
+    render();
+  };
+
+  const remove = (item) => {
+    if (!confirm(`«${item.name || item.instagram || 'bu loyiha'}» o‘chirilsinmi?`)) return;
+    list.splice(list.indexOf(item), 1);
+    markDirty('portfolio');
+    render();
+  };
+
+  /** Ekran surati: brauzerda kichraytirilib yuklanadi */
+  const setImage = (item) =>
+    pickImage(async (file) => {
+      try {
+        const url = await uploadImage(file, 'work');
+        if (!url) return;
+        item.image = url;
+        markDirty('portfolio');
+        render();
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
   const cards = shown.map((item) => {
     const badge = el('span', {
       class: `badge ${item.url ? 'live' : 'none'}`,
@@ -297,10 +339,11 @@ function renderPortfolio() {
         thumb,
         el('div', {}, [
           el('div', { class: 'list-head' }, [
-            el('strong', { text: item.name || `@${item.instagram}` }),
+            el('strong', { text: item.name || (item.instagram ? `@${item.instagram}` : 'yangi loyiha') }),
             badge,
             el('button', { class: 'ghost', text: '↑', title: 'Yuqoriga', onclick: () => move(item, -1) }),
             el('button', { class: 'ghost', text: '↓', title: 'Pastga', onclick: () => move(item, 1) }),
+            el('button', { class: 'ghost', text: 'O‘chirish', onclick: () => remove(item) }),
           ]),
 
           el('div', { class: 'row' }, [el('label', { text: 'Sayt havolasi' }), url]),
@@ -317,6 +360,11 @@ function renderPortfolio() {
           ]),
 
           el('div', { class: 'toggles' }, [
+            el('button', {
+              class: 'ghost',
+              text: item.image ? 'Suratni almashtirish' : 'Surat qo‘shish',
+              onclick: () => setImage(item),
+            }),
             toggle('featured', 'Asosiy (birinchi turadi)'),
             toggle('hidden', 'Saytda ko‘rsatilmasin'),
           ]),
@@ -331,11 +379,186 @@ function renderPortfolio() {
       text: `${list.length} ta loyiha · ${withUrl} tasida havola bor · ${list.length - withUrl} tasi kutmoqda. Havolani qo‘ysangiz, karta saytda bosiladigan bo‘ladi.`,
     }),
     el('div', { class: 'filters' }, [
+      el('button', { class: 'primary', text: '+ Loyiha qo‘shish', onclick: add }),
       search,
       el('label', { class: 'toggle' }, [missing, el('span', { text: 'Faqat havolasizlari' })]),
       el('span', { class: 'status', text: `${shown.length} ta ko‘rsatilmoqda` }),
     ]),
     ...cards,
+  ]);
+}
+
+// ------------------------------------------------------------------ suratlar
+/**
+ * Suratni BRAUZERDA kichraytiradi va webp'ga o'giradi.
+ *
+ * Nega bu yerda: telefondan olingan skrinshot 3–8 MB bo'ladi. Uni shundayligicha
+ * yuborsak, internetga chiqarilgan panelning so'rov chegarasiga urilamiz va
+ * sayt ham og'irlashadi. Kichraytirilgani ~100–200 KB bo'ladi.
+ *
+ * `toDataURL('image/webp')` qo'llab-quvvatlanmasa brauzer jim turib png
+ * qaytaradi — shuning uchun natija tekshiriladi va kerak bo'lsa jpeg olinadi.
+ */
+async function shrink(file, maxWidth = 900, quality = 0.82) {
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, maxWidth / bitmap.width);
+
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(bitmap.width * scale);
+  canvas.height = Math.round(bitmap.height * scale);
+  canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  bitmap.close?.();
+
+  const webp = canvas.toDataURL('image/webp', quality);
+  return webp.startsWith('data:image/webp') ? webp : canvas.toDataURL('image/jpeg', quality);
+}
+
+/** Fayl tanlash oynasini ochadi */
+function pickImage(onPick) {
+  const input = el('input', { type: 'file', accept: 'image/*', style: 'display:none' });
+  input.addEventListener('change', () => {
+    if (input.files?.[0]) onPick(input.files[0]);
+    input.remove();
+  });
+  document.body.append(input);
+  input.click();
+}
+
+/** Suratni serverga yuboradi va saytdagi manzilini qaytaradi */
+async function uploadImage(file, folder) {
+  const dataUrl = await shrink(file);
+  const response = await fetch('/api/upload', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ folder, dataUrl }),
+  });
+
+  if (response.status === 401) {
+    showGate();
+    return null;
+  }
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || !result.url) throw new Error(result.error ?? 'Surat yuklanmadi');
+  return result.url;
+}
+
+/** Yangi yozuv uchun qisqa, takrorlanmaydigan id */
+const newId = (prefix) => `${prefix}-${Date.now().toString(36)}`;
+
+// ------------------------------------------------------------------ mijoz fikrlari
+function renderReviews() {
+  const list = state.files.reviews;
+
+  const move = (index, step) => {
+    const next = index + step;
+    if (next < 0 || next >= list.length) return;
+    [list[index], list[next]] = [list[next], list[index]];
+    markDirty('reviews');
+    render();
+  };
+
+  const remove = async (index) => {
+    if (!confirm('Shu fikr o‘chirilsinmi?')) return;
+    const [gone] = list.splice(index, 1);
+    markDirty('reviews');
+    render();
+
+    // Surat ham keraksiz bo'lib qoladi — uni ham olib tashlaymiz
+    if (gone?.image) {
+      await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ remove: state.mode === 'cloud' ? `public${gone.image}` : gone.image }),
+      }).catch(() => {});
+    }
+  };
+
+  const add = () =>
+    pickImage(async (file) => {
+      const status = document.getElementById('status');
+      status.className = 'status';
+      status.textContent = 'surat yuklanmoqda…';
+      try {
+        const url = await uploadImage(file, 'reviews');
+        if (!url) return;
+        list.push({ id: newId('fikr'), image: url, name: '', note: '', hidden: false });
+        markDirty('reviews');
+        render();
+      } catch (error) {
+        status.className = 'status dirty';
+        status.textContent = error.message;
+      }
+    });
+
+  const replace = (item) =>
+    pickImage(async (file) => {
+      try {
+        const url = await uploadImage(file, 'reviews');
+        if (!url) return;
+        item.image = url;
+        markDirty('reviews');
+        render();
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
+  const field = (item, key, title) => {
+    const input = el('input', { type: 'text' });
+    input.value = item[key] ?? '';
+    input.addEventListener('input', () => {
+      item[key] = input.value;
+      markDirty('reviews');
+    });
+    return el('div', {}, [el('label', { text: title }), input]);
+  };
+
+  const toggle = (item) => {
+    const box = el('input', { type: 'checkbox' });
+    box.checked = Boolean(item.hidden);
+    box.addEventListener('change', () => {
+      item.hidden = box.checked;
+      markDirty('reviews');
+    });
+    return el('label', { class: 'toggle' }, [box, el('span', { text: 'Saytda ko‘rsatilmasin' })]);
+  };
+
+  return el('div', {}, [
+    el('p', {
+      class: 'hint',
+      text:
+        'Yozishmadan olingan skrinshotni qo‘yasiz. Surat o‘zi kichraytiriladi. ' +
+        'Bitta ham fikr bo‘lmasa, bu bo‘lim saytda umuman ko‘rinmaydi.',
+    }),
+
+    el('button', { class: 'primary', text: '+ Fikr qo‘shish', onclick: add }),
+    el('div', { style: 'height:16px' }),
+
+    ...list.map((item, index) =>
+      el('div', { class: 'card' }, [
+        el('div', { class: 'project' }, [
+          el('img', { src: item.image, alt: '', loading: 'lazy' }),
+          el('div', {}, [
+            el('div', { class: 'list-head' }, [
+              el('strong', { text: item.name || `Fikr ${index + 1}` }),
+              el('button', { class: 'ghost', text: '↑', onclick: () => move(index, -1) }),
+              el('button', { class: 'ghost', text: '↓', onclick: () => move(index, 1) }),
+              el('button', { class: 'ghost', text: 'O‘chirish', onclick: () => remove(index) }),
+            ]),
+            el('div', { class: 'row two' }, [
+              field(item, 'name', 'Kim yozgan (ixtiyoriy)'),
+              field(item, 'note', 'Izoh (ixtiyoriy)'),
+            ]),
+            el('div', { class: 'toggles' }, [
+              el('button', { class: 'ghost', text: 'Suratni almashtirish', onclick: () => replace(item) }),
+              toggle(item),
+            ]),
+          ]),
+        ]),
+      ]),
+    ),
+
+    list.length === 0 ? el('p', { class: 'hint', text: 'Hozircha fikr yo‘q.' }) : null,
   ]);
 }
 
@@ -534,6 +757,21 @@ function renderSettings() {
  * tashlash yoki saytni internetga chiqarmasdan tekshirish uchun.
  */
 function renderBuild() {
+  // Internetdagi panelda yig'ish tugmasi kerak emas: saqlash = e'lon qilish.
+  if (state.mode === 'cloud') {
+    return el('div', { class: 'card' }, [
+      el('div', { class: 'group-title', text: 'Sayt qanday yangilanadi' }),
+      el('p', {
+        class: 'hint',
+        html:
+          'Bu panel internetda ishlayapti, shuning uchun alohida yig‘ish kerak emas.<br>' +
+          '<b>Saqlash</b> bosilganda o‘zgarish GitHub‘ga yoziladi, Vercel esa saytni ' +
+          'bir-ikki daqiqada o‘zi qayta yig‘adi. Sahifani biroz kutib yangilang.',
+      }),
+      el('p', { class: 'hint', text: 'Kompyuterdagi panelda esa bu yerda yig‘ish va yuborish tugmalari turadi.' }),
+    ]);
+  }
+
   const log = el('div', { class: 'build-log', text: 'Hali hech narsa qilinmadi.' });
   const message = el('input', { type: 'text', placeholder: 'Nima o‘zgardi? (ixtiyoriy)' });
 
@@ -597,6 +835,7 @@ function renderBuild() {
 const TABS = [
   ['portfolio', 'Loyihalar', renderPortfolio],
   ['packages', 'Paketlar', renderPackages],
+  ['reviews', 'Fikrlar', renderReviews],
   ['faq', 'Savollar', renderFaq],
   ['site', 'Matnlar', renderSite],
   ['settings', 'Sozlamalar', renderSettings],
@@ -629,31 +868,58 @@ function render() {
 
   const view = document.getElementById('view');
   const current = TABS.find(([id]) => id === state.tab);
-  view.replaceChildren(current[2]());
+
+  // Internetdagi panelda qisqa parol haqiqiy xavf — buni yashirib bo'lmaydi
+  const warning = state.weak
+    ? el('div', {
+        class: 'card',
+        style: 'border-color:var(--coral);background:rgba(255,90,78,0.08)',
+      }, [
+        el('div', { class: 'group-title', style: 'color:var(--coral);margin-top:0', text: 'Parol juda qisqa' }),
+        el('p', {
+          class: 'hint',
+          style: 'margin:0',
+          text:
+            'Bu panel internetda turibdi. Vercel sozlamalaridagi ADMIN_PASSWORD ni uzunroq qiling ' +
+            '(kamida 10 belgi) — aks holda havolani topgan odam saytingizni o‘zgartira oladi.',
+        }),
+      ])
+    : null;
+
+  view.replaceChildren(...[warning, current[2]()].filter(Boolean));
   renderStatus();
 }
 
 async function save() {
   const status = document.getElementById('status');
-  for (const file of [...state.dirty]) {
-    const response = await fetch('/api/save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ file, data: state.files[file] }),
-    });
-    if (response.status === 401) {
-      showGate();
-      return;
-    }
-    if (!response.ok) {
-      status.className = 'status dirty';
-      status.textContent = `«${file}» saqlanmadi`;
-      return;
-    }
-    state.dirty.delete(file);
+  const files = [...state.dirty].map((file) => ({ file, data: state.files[file] }));
+  if (files.length === 0) return;
+
+  status.className = 'status';
+  status.textContent = 'saqlanmoqda…';
+
+  const response = await fetch('/api/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ files }),
+  });
+
+  if (response.status === 401) {
+    showGate();
+    return;
   }
+
+  if (!response.ok) {
+    const result = await response.json().catch(() => ({}));
+    status.className = 'status dirty';
+    status.textContent = result.error ?? 'Saqlanmadi';
+    return;
+  }
+
+  state.dirty.clear();
   status.className = 'status ok';
-  status.textContent = 'saqlandi ✓';
+  // Internetdagi panelda saqlash = e'lon qilish: Vercel saytni o'zi yangilaydi
+  status.textContent = state.mode === 'cloud' ? 'saqlandi ✓ — sayt yangilanmoqda' : 'saqlandi ✓';
   document.getElementById('save').disabled = true;
 }
 
@@ -676,6 +942,8 @@ async function enter() {
   const data = await response.json();
   state.files = data.files;
   state.login = data.login;
+  state.mode = data.mode ?? 'local';
+  state.weak = Boolean(data.weak);
   state.dirty.clear();
   gate.hidden = true;
   render();

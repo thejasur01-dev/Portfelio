@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import SectionHead from './SectionHead';
 import Reveal from './Reveal';
 import { useLanguage } from '../i18n/useLanguage';
+import { sectionIndex } from '../lib/sectionIndex';
 
 /**
  * «Instagram sotadi, sayt ishontiradi» — oldin/keyin qatorlari.
@@ -19,7 +20,7 @@ export default function Problem() {
   return (
     <section id="problem" className="relative overflow-hidden px-5 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-[78rem]">
-        <SectionHead eyebrow={tr(problem.eyebrow)} title={tr(problem.title)} index="01" />
+        <SectionHead eyebrow={tr(problem.eyebrow)} title={tr(problem.title)} index={sectionIndex('problem')} />
 
         <ul className="mt-12 sm:mt-16">
           {problem.rows.map((row, index) => (

@@ -2,6 +2,7 @@ import { CalendarCheck, Languages, MessageCircle, Palette, Smartphone, Tag, Zap 
 import SectionHead from './SectionHead';
 import Reveal from './Reveal';
 import { useLanguage } from '../i18n/useLanguage';
+import { sectionIndex } from '../lib/sectionIndex';
 
 const ICONS = {
   iphone: Smartphone,
@@ -40,7 +41,7 @@ export default function Features() {
       className="relative z-[2] -mt-6 overflow-hidden rounded-t-[34px] bg-void px-5 py-20 sm:px-8 sm:py-28 lg:rounded-t-[54px]"
     >
       <div className="mx-auto max-w-[78rem]">
-        <SectionHead eyebrow={tr(features.eyebrow)} title={tr(features.title)} index="03" />
+        <SectionHead eyebrow={tr(features.eyebrow)} title={tr(features.title)} index={sectionIndex('features')} />
 
         <ul className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {features.items.map((item, index) => {
