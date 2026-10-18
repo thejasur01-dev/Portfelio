@@ -1,4 +1,5 @@
 import { guard } from './_lib/auth.js';
+import { explain } from './_lib/explain.js';
 import { readJson } from './_lib/github.js';
 
 // Admin panel tahrirlaydigan fayllar
@@ -18,6 +19,6 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ files, login: process.env.ADMIN_LOGIN ?? '', mode: 'cloud', weak });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: explain(error) });
   }
 }

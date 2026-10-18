@@ -1,4 +1,5 @@
 import { randomBytes } from 'node:crypto';
+import { explain } from './_lib/explain.js';
 import { guard, readBody } from './_lib/auth.js';
 import { commitFiles, deleteFile } from './_lib/github.js';
 
@@ -57,6 +58,6 @@ export default async function handler(req, res) {
     // Saytda surat shu manzil bilan ko'rinadi
     return res.status(200).json({ ok: true, url: `/${folder}/${name}`, path });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: explain(error) });
   }
 }

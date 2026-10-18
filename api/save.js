@@ -1,4 +1,5 @@
 import { guard, readBody } from './_lib/auth.js';
+import { explain } from './_lib/explain.js';
 import { commitFiles } from './_lib/github.js';
 
 const ALLOWED = new Set(['site', 'packages', 'faq', 'portfolio', 'reviews', 'settings']);
@@ -25,6 +26,6 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ ok: true, commit: sha, savedAt: new Date().toISOString() });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: explain(error) });
   }
 }

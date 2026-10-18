@@ -31,13 +31,18 @@ async function gh(path, options = {}) {
       'X-GitHub-Api-Version': '2022-11-28',
       'Content-Type': 'application/json',
       'User-Agent': 'voyla-admin',
+      // Shoxning uchini eski nusxadan olmaslik uchun: keshlangan javob kelsa,
+      // commit eskirgan ota-commitga bog'lanadi va GitHub uni rad etadi
+      'Cache-Control': 'no-cache',
       ...options.headers,
     },
   });
 
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(`GitHub ${response.status}: ${text.slice(0, 300)}`);
+    const error = new Error(`GitHub ${response.status}: ${text.slice(0, 300)}`);
+    error.status = response.status;
+    throw error;
   }
   return response.json();
 }
@@ -55,14 +60,16 @@ export async function readJson(path) {
  * commit bo'lib, Vercel saytni necha marta qayta yig'ardi. Bitta commit —
  * bitta qayta yig'ish.
  *
+ * Shox uchi (`main`) biz o'qigandan keyin o'zgargan bo'lishi mumkin: siz
+ * kompyuterdan push qilgansiz, yoki panel ikki joyda ochiq. Unda GitHub
+ * «Update is not a fast forward» deb rad etadi. Bunday holatda shox uchini
+ * qaytadan o'qib, ustiga yozamiz — fayllar (blob'lar) shoxga bog'liq emas,
+ * shuning uchun ularni qayta yuklash shart emas.
+ *
  * @param {{path: string, base64: string}[]} files
  */
 export async function commitFiles(files, message) {
   if (files.length === 0) return null;
-
-  const ref = await gh(`/repos/${repo()}/git/ref/heads/${branch()}`);
-  const headSha = ref.object.sha;
-  const headCommit = await gh(`/repos/${repo()}/git/commits/${headSha}`);
 
   const tree = [];
   for (const file of files) {
@@ -73,22 +80,45 @@ export async function commitFiles(files, message) {
     tree.push({ path: file.path, mode: '100644', type: 'blob', sha: blob.sha });
   }
 
-  const newTree = await gh(`/repos/${repo()}/git/trees`, {
-    method: 'POST',
-    body: JSON.stringify({ base_tree: headCommit.tree.sha, tree }),
-  });
+  const ATTEMPTS = 4;
+  let lastError;
 
-  const commit = await gh(`/repos/${repo()}/git/commits`, {
-    method: 'POST',
-    body: JSON.stringify({ message, tree: newTree.sha, parents: [headSha] }),
-  });
+  for (let attempt = 1; attempt <= ATTEMPTS; attempt += 1) {
+    try {
+      const ref = await gh(`/repos/${repo()}/git/ref/heads/${branch()}`);
+      const headSha = ref.object.sha;
+      const headCommit = await gh(`/repos/${repo()}/git/commits/${headSha}`);
 
-  await gh(`/repos/${repo()}/git/refs/heads/${branch()}`, {
-    method: 'PATCH',
-    body: JSON.stringify({ sha: commit.sha }),
-  });
+      const newTree = await gh(`/repos/${repo()}/git/trees`, {
+        method: 'POST',
+        body: JSON.stringify({ base_tree: headCommit.tree.sha, tree }),
+      });
 
-  return commit.sha;
+      const commit = await gh(`/repos/${repo()}/git/commits`, {
+        method: 'POST',
+        body: JSON.stringify({ message, tree: newTree.sha, parents: [headSha] }),
+      });
+
+      await gh(`/repos/${repo()}/git/refs/heads/${branch()}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ sha: commit.sha }),
+      });
+
+      return commit.sha;
+    } catch (error) {
+      lastError = error;
+
+      // Faqat «shox o'zgarib ketdi» xatosida qayta urinamiz. Token yoki
+      // huquq xatosini qayta urinish tuzatmaydi — darhol aytgan ma'qul.
+      const moved = error.status === 422 || error.status === 409;
+      if (!moved || attempt === ATTEMPTS) throw error;
+
+      // Keshlangan javob o'tib ketishi uchun biroz kutamiz
+      await new Promise((resolve) => setTimeout(resolve, 600 * attempt));
+    }
+  }
+
+  throw lastError;
 }
 
 /** Faylni o'chiradi (surat olib tashlanganda) */
