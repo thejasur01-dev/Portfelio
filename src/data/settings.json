@@ -2,12 +2,12 @@
   "origin": "https://voylauz.vercel.app",
   "sections": {
     "problem": true,
-    "work": true,
-    "features": true,
+    "work": false,
+    "features": false,
     "reviews": true,
-    "process": true,
-    "pricing": true,
-    "faq": true,
+    "process": false,
+    "pricing": false,
+    "faq": false,
     "contact": true
   },
   "tickers": false,
