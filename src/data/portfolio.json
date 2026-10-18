@@ -1,5 +1,41 @@
 [
   {
+    "id": "loyiha-mvedt9e1",
+    "name": "Mastura",
+    "role": "Kosmetolog",
+    "city": "Toshkent",
+    "instagram": "",
+    "tags": [],
+    "image": "/work/mvedtwvq-7a5f3a.webp",
+    "url": "https://drmastura.netlify.app/",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "loyiha-mvedq5i1",
+    "name": "Gulirano",
+    "role": "Kosmetolog",
+    "city": "Toshkent",
+    "instagram": "",
+    "tags": [],
+    "image": "/work/mvedsmbi-79171a.webp",
+    "url": "https://guliranokosmetolog.netlify.app/",
+    "featured": false,
+    "hidden": false
+  },
+  {
+    "id": "loyiha-mvedpixc",
+    "name": "Dilya",
+    "role": "Lashmaker",
+    "city": "Toshkent",
+    "instagram": "@dilya.browis",
+    "tags": [],
+    "image": "/work/mvedpn3m-975068.webp",
+    "url": "https://browuz.netlify.app/",
+    "featured": false,
+    "hidden": false
+  },
+  {
     "id": "loyiha-mvedkncp",
     "name": "Gulnoza  Zahidovna",
     "role": "Kosmetolog",
@@ -20,18 +56,6 @@
     "tags": [],
     "image": "/work/mved6tre-d0985c.webp",
     "url": "https://gulikosmetolog.netlify.app/",
-    "featured": false,
-    "hidden": false
-  },
-  {
-    "id": "loyiha-mvecjqw0",
-    "name": "browuz",
-    "role": "Lashmaker",
-    "city": "Toshkent",
-    "instagram": "@dilya.browis",
-    "tags": [],
-    "image": "",
-    "url": "https://browuz.netlify.app/",
     "featured": false,
     "hidden": false
   },
