@@ -12,7 +12,9 @@ echo.
 call npm run build
 
 echo.
-echo   Tayyor. Endi "dist" papkasini Netlify oynasiga tashlang.
+echo   Tayyor. Odatda bu kerak emas - "SAYTNI CHIQARISH.bat" dan
+echo   foydalaning, Vercel saytni o'zi yangilaydi.
+echo   Qo'lda joylamoqchi bo'lsangiz: "dist" papkasini tashlang.
 echo.
 explorer "%~dp0dist"
 pause
