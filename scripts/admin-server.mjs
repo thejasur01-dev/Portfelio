@@ -130,17 +130,57 @@ const body = (req) =>
     req.on('error', reject);
   });
 
-/** `npm run build` ni ishga tushiradi va chiqishini qaytaradi */
-function build() {
+/** Buyruqni loyiha papkasida ishga tushiradi va chiqishini qaytaradi */
+function run(command, args) {
   return new Promise((resolve) => {
-    const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-    const child = spawn(npm, ['run', 'build'], { cwd: ROOT, shell: process.platform === 'win32' });
+    // Windows'da `npm` — bu .cmd fayl, uni faqat shell orqali chaqirib bo'ladi.
+    // `git` esa oddiy .exe: unga shell BERILMAYDI, aks holda argumentlar
+    // bo'shliq bo'yicha bo'linib ketadi va izohdagi har bir so'z alohida
+    // argumentga aylanadi («pathspec ... did not match»).
+    const isNpm = command === 'npm';
+    const exe = isNpm && process.platform === 'win32' ? 'npm.cmd' : command;
+    const child = spawn(exe, args, { cwd: ROOT, shell: isNpm && process.platform === 'win32' });
     let out = '';
     child.stdout.on('data', (data) => (out += data));
     child.stderr.on('data', (data) => (out += data));
-    child.on('close', (code) => resolve({ ok: code === 0, output: out.slice(-4000) }));
+    child.on('close', (code) => resolve({ ok: code === 0, output: out }));
     child.on('error', (error) => resolve({ ok: false, output: error.message }));
   });
+}
+
+const build = () => run('npm', ['run', 'build']);
+
+/**
+ * O'zgarishni GitHub'ga yuboradi — Vercel o'zi ko'rib, saytni qayta yig'adi.
+ *
+ * Ya'ni `dist` papkasini qo'lda tashlab yurish kerak emas: saqladingiz, shu
+ * tugmani bosdingiz, bir-ikki daqiqadan keyin sayt yangilanadi.
+ */
+async function publish(message) {
+  const steps = [];
+  const note = (title, result) => {
+    steps.push(`$ ${title}\n${result.output.trim()}`);
+    return result;
+  };
+  const log = () => steps.join('\n\n');
+
+  const added = note('git add -A', await run('git', ['add', '-A']));
+  if (!added.ok) return { ok: false, output: log() };
+
+  const text = String(message || '').trim() || `Sayt matni yangilandi — ${new Date().toLocaleString('uz-UZ')}`;
+  const committed = note('git commit', await run('git', ['commit', '-m', text]));
+
+  // «nothing to commit» — xato emas: o'zgarish yo'q, demak yuboradigan narsa ham yo'q
+  if (/nothing to commit|nothing added to commit/i.test(committed.output)) {
+    return { ok: true, output: `${log()}\n\n— Yangi o‘zgarish yo‘q, yuborilmadi.` };
+  }
+  if (!committed.ok) return { ok: false, output: log() };
+
+  const pushed = note('git push', await run('git', ['push']));
+  const tail = pushed.ok
+    ? '— Yuborildi. Vercel bir-ikki daqiqada saytni yangilaydi.'
+    : '— Yuborilmadi. Quyidagi xabarni o‘qing.';
+  return { ok: pushed.ok, output: `${log()}\n\n${tail}` };
 }
 
 const serveFile = (res, file) => {
@@ -213,7 +253,14 @@ const server = createServer(async (req, res) => {
     }
 
     if (path === '/api/build' && req.method === 'POST') {
-      return json(res, 200, await build());
+      const result = await build();
+      return json(res, 200, { ok: result.ok, output: result.output.slice(-4000) });
+    }
+
+    if (path === '/api/publish' && req.method === 'POST') {
+      const payload = JSON.parse(await body(req));
+      const result = await publish(payload.message);
+      return json(res, 200, { ok: result.ok, output: result.output.slice(-6000) });
     }
 
     // ---------- Rasmlar ----------

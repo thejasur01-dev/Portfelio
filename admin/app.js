@@ -523,33 +523,72 @@ function renderSettings() {
 }
 
 // ------------------------------------------------------------------ yig'ish
+/**
+ * «Yig'ish» bo'limi.
+ *
+ * Asosiy tugma — «Saytni internetga chiqarish»: u o'zgarishni GitHub'ga
+ * yuboradi, Vercel esa buni ko'rib saytni o'zi qayta yig'adi. Ya'ni
+ * kundalik ishda `dist` papkasini hech qayerga tashlash kerak emas.
+ *
+ * Ikkinchi tugma faqat kompyuterda yig'adi — natijani Netlify'ga qo'lda
+ * tashlash yoki saytni internetga chiqarmasdan tekshirish uchun.
+ */
 function renderBuild() {
-  const log = el('div', { class: 'build-log', text: 'Hali yig‘ilmadi.' });
+  const log = el('div', { class: 'build-log', text: 'Hali hech narsa qilinmadi.' });
+  const message = el('input', { type: 'text', placeholder: 'Nima o‘zgardi? (ixtiyoriy)' });
 
-  const run = async (button) => {
-    button.disabled = true;
-    log.textContent = 'Yig‘ilmoqda…';
-    const response = await fetch('/api/build', { method: 'POST' });
-    const result = await response.json();
+  const call = async (button, url, payload, working) => {
+    const buttons = [...document.querySelectorAll('#view button')];
+    buttons.forEach((item) => (item.disabled = true));
+    log.style.color = 'var(--mute)';
+    log.textContent = working;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload ?? {}),
+    });
+
+    if (response.status === 401) {
+      showGate();
+      return;
+    }
+
+    const result = await response.json().catch(() => ({ ok: false, output: 'Javob o‘qilmadi' }));
     log.textContent = result.output || '(chiqish bo‘sh)';
     log.style.color = result.ok ? 'var(--ok)' : 'var(--coral)';
-    button.disabled = false;
+    buttons.forEach((item) => (item.disabled = false));
   };
 
-  return el('div', { class: 'card' }, [
-    el('div', { class: 'group-title', text: 'Saytni yig‘ish va joylash' }),
-    el('p', {
-      class: 'hint',
-      html:
-        'Tartibi: <b>1)</b> o‘zgartirasiz · <b>2)</b> «Saqlash» · <b>3)</b> «Saytni yig‘ish» · ' +
-        '<b>4)</b> loyihadagi <code>dist</code> papkasini Netlify oynasiga tashlaysiz.',
-    }),
-    el('button', {
-      class: 'primary',
-      text: 'Saytni yig‘ish',
-      onclick: (event) => run(event.currentTarget),
-    }),
-    el('div', { style: 'height:12px' }),
+  return el('div', {}, [
+    el('div', { class: 'card' }, [
+      el('div', { class: 'group-title', text: 'Saytni internetga chiqarish' }),
+      el('p', {
+        class: 'hint',
+        html:
+          'Tartibi: <b>1)</b> o‘zgartirasiz · <b>2)</b> «Saqlash» · <b>3)</b> shu tugma.<br>' +
+          'O‘zgarish GitHub‘ga yuboriladi, Vercel saytni bir-ikki daqiqada o‘zi yangilaydi.',
+      }),
+      el('div', { class: 'row' }, [el('label', { text: 'Izoh' }), message]),
+      el('button', {
+        class: 'primary',
+        text: 'Saytni internetga chiqarish',
+        onclick: (event) => call(event.currentTarget, '/api/publish', { message: message.value }, 'Yuborilmoqda…'),
+      }),
+    ]),
+
+    el('div', { class: 'card' }, [
+      el('div', { class: 'group-title', text: 'Faqat kompyuterda yig‘ish' }),
+      el('p', {
+        class: 'hint',
+        text: 'Saytni internetga chiqarmasdan tekshirish yoki dist papkasini qo‘lda tashlash uchun.',
+      }),
+      el('button', {
+        text: 'Yig‘ish',
+        onclick: (event) => call(event.currentTarget, '/api/build', null, 'Yig‘ilmoqda…'),
+      }),
+    ]),
+
     log,
   ]);
 }

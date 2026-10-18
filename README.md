@@ -16,7 +16,8 @@ Papkada uchta fayl bor, buyruq yozish shart emas:
 | --- | --- |
 | **ADMIN PANEL.bat** | Admin panelni ochadi (brauzer o'zi chiqadi) |
 | **SAYTNI KORISH.bat** | Saytni kompyuterda ko'rsatadi |
-| **SAYTNI YIGISH.bat** | `dist` papkasini tayyorlaydi va o'sha papkani ochib beradi |
+| **SAYTNI CHIQARISH.bat** | O'zgarishni GitHub'ga yuboradi — Vercel saytni o'zi yangilaydi |
+| **SAYTNI YIGISH.bat** | `dist` papkasini tayyorlaydi (qo'lda joylash kerak bo'lsa) |
 
 Birinchi marta bosganda kutubxonalar o'rnatiladi — bir necha daqiqa ketadi,
 keyingi safar darhol ishga tushadi.
@@ -42,10 +43,19 @@ npm run brand:assets # belgichalar va og-cover.jpg
 
 ### Saytga o'zgartirish kiritish tartibi
 
-1. **ADMIN PANEL.bat** — brauzer o'zi ochiladi
+1. **ADMIN PANEL.bat** — brauzer o'zi ochiladi (`http://localhost:4455`)
 2. kerakli joyni o'zgartirasiz → **Saqlash**
-3. **Yig'ish** bo'limi → «Saytni yig'ish»
-4. `dist` papkasini Netlify oynasiga tashlaysiz
+3. **Yig'ish** bo'limi → «Saytni internetga chiqarish»
+
+Tamom. O'zgarish GitHub'ga ketadi, **Vercel** uni ko'rib saytni bir-ikki
+daqiqada o'zi qayta yig'adi — `dist` papkasini hech qayerga tashlash shart emas.
+
+Sayt: **https://voylauz.vercel.app**
+
+> Admin panel **sizning kompyuteringizda** ishlaydi, internetda emas.
+> `voylauz.vercel.app/admin` degan sahifa yo'q va bo'lishi ham mumkin emas:
+> Vercel tayyor sahifani ko'rsatadi, fayl yoza olmaydi. Shuning uchun panel
+> ochiq turmaydi, hech kim uni topa olmaydi va oylik to'lov ham yo'q.
 
 Admin panel to'g'ridan-to'g'ri `src/data/*.json` fayllarini yozadi, har saqlashdan
 oldin eski nusxa `.admin-backups/` ga olinadi (oxirgi 20 tasi saqlanadi).
@@ -206,9 +216,17 @@ yuklanadi.
 
 ---
 
-## 7. Netlify
+## 7. Joylashtirish
 
-`netlify.toml`, `public/_headers` va `public/_redirects` tayyor.
-`dist` papkasini qo'lda tashlasangiz ham, Git orqali ulasangiz ham ishlaydi.
-Bitta sahifali sayt bo'lgani uchun `/*  /index.html  200` qoidasi 404 chiqmasligini
-ta'minlaydi.
+**Hozirgi holat: Vercel + GitHub.**
+Repozitoriy: `github.com/thejasur01-dev/Portfelio` · sayt: `voylauz.vercel.app`
+
+`vercel.json` da yig'ish buyrug'i va kesh sozlamalari turadi. `main` tarmog'iga
+har push'da Vercel saytni o'zi qayta yig'adi.
+
+**Netlify ham ishlaydi:** `netlify.toml`, `public/_headers` va
+`public/_redirects` joyida turibdi — `dist` papkasini qo'lda tashlasangiz ham,
+Git orqali ulasangiz ham ochiladi.
+
+**Domen almashtirish:** `Sozlamalar → Sayt manzili` dan yozasiz, yig'ishda
+`index.html` dagi barcha meta teglar o'zi yangilanadi.
